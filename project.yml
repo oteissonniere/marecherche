@@ -1,0 +1,187 @@
+# xcodegen project definition. Regenerate with `xcodegen generate` after any change.
+# The generated MaRecherche.xcodeproj is git-ignored.
+name: MaRecherche
+options:
+  bundleIdPrefix: eu.teissonniere
+  deploymentTarget:
+    iOS: "17.0"
+    macOS: "14.0"
+  xcodeVersion: "16.0"
+  generateEmptyDirectories: true
+  # Config/Local.xcconfig is git-ignored; the project must still generate without it.
+  disabledValidations: [missingConfigFiles]
+
+# Per-developer settings (DEVELOPMENT_TEAM) live outside the repository.
+configFiles:
+  Debug: Config/Local.xcconfig
+  Release: Config/Local.xcconfig
+
+settings:
+  base:
+    SWIFT_VERSION: "5.10"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGN_STYLE: Automatic
+    # DEVELOPMENT_TEAM comes from Config/Local.xcconfig (see configFiles above).
+
+targetTemplates:
+  AppBase:
+    type: application
+    sources:
+      - path: App
+        excludes: ["Info-*.plist", "*.entitlements"]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: eu.teissonniere.marecherche
+        PRODUCT_NAME: MaRecherche
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: NO
+  ExtensionBase:
+    type: app-extension
+    sources:
+      - path: Extension
+        excludes: ["Info-*.plist", "*.entitlements"]
+      # Each top-level entry of webext/src is copied as-is, so manifest.json ends up at
+      # the root of the .appex Resources.
+      - path: webext/src/manifest.json
+        buildPhase: resources
+      - path: webext/src/background.js
+        buildPhase: resources
+      - path: webext/src/ui.css
+        buildPhase: resources
+      - path: webext/src/_locales
+        type: folder
+        buildPhase: resources
+      - path: webext/src/icons
+        type: folder
+        buildPhase: resources
+      - path: webext/src/lib
+        type: folder
+        buildPhase: resources
+      - path: webext/src/popup
+        type: folder
+        buildPhase: resources
+      - path: webext/src/settings
+        type: folder
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: eu.teissonniere.marecherche.Extension
+        PRODUCT_NAME: MaRechercheExtension
+        GENERATE_INFOPLIST_FILE: NO
+
+targets:
+  MaRecherche-iOS:
+    templates: [AppBase]
+    platform: iOS
+    info:
+      path: App/Info-iOS.plist
+      properties:
+        CFBundleDisplayName: Ma recherche
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSLocalNetworkUsageDescription: Ma recherche checks whether your private search instance on the local network is reachable.
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+    entitlements:
+      path: App/MaRecherche-iOS.entitlements
+      properties: {}
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: "1,2"
+        # No "My Mac (Designed for iPad)" destination: the Mac has its own native target,
+        # and an iOS build running on macOS cannot install its extension into Safari.
+        SUPPORTS_MACCATALYST: NO
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+    dependencies:
+      - target: Extension-iOS
+        embed: true
+
+  MaRecherche-macOS:
+    templates: [AppBase]
+    platform: macOS
+    info:
+      path: App/Info-macOS.plist
+      properties:
+        CFBundleDisplayName: Ma recherche
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSLocalNetworkUsageDescription: Ma recherche checks whether your private search instance on the local network is reachable.
+        LSApplicationCategoryType: public.app-category.utilities
+    entitlements:
+      path: App/MaRecherche-macOS.entitlements
+      # xcodegen GENERATES the entitlements file from these properties on every
+      # `xcodegen generate`; do not edit the .entitlements files by hand.
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.network.client: true
+    settings:
+      base:
+        ENABLE_HARDENED_RUNTIME: YES
+    dependencies:
+      - target: Extension-macOS
+        embed: true
+
+  Extension-iOS:
+    templates: [ExtensionBase]
+    platform: iOS
+    info:
+      path: Extension/Info-iOS.plist
+      properties: &extensionInfo
+        CFBundleDisplayName: Ma recherche
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.Safari.web-extension
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).SafariWebExtensionHandler
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SUPPORTS_MACCATALYST: NO
+        SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD: NO
+
+  Extension-macOS:
+    templates: [ExtensionBase]
+    platform: macOS
+    info:
+      path: Extension/Info-macOS.plist
+      properties: *extensionInfo
+    entitlements:
+      path: Extension/Extension-macOS.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.network.client: true
+    settings:
+      base:
+        ENABLE_HARDENED_RUNTIME: YES
+
+  AppTests-macOS:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [Tests/AppTests]
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: eu.teissonniere.marecherche.AppTests
+        # xcodegen derives TEST_HOST from the target name; the app's PRODUCT_NAME differs.
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/MaRecherche.app/Contents/MacOS/MaRecherche
+        BUNDLE_LOADER: $(TEST_HOST)
+    dependencies:
+      - target: MaRecherche-macOS
+
+schemes:
+  "MaRecherche (iOS)":
+    build: { targets: { MaRecherche-iOS: all } }
+    run: { config: Debug }
+  "MaRecherche (macOS)":
+    build: { targets: { MaRecherche-macOS: all } }
+    run: { config: Debug }
+    test: { targets: [AppTests-macOS] }

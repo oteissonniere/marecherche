@@ -13,3 +13,6 @@ webext/node_modules/
 # Signing material
 *.mobileprovision
 *.p12
+
+# Local signing settings (copy Config/Local.xcconfig.example)
+Config/Local.xcconfig
