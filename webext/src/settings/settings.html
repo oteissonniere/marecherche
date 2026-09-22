@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="settings_title">Ma recherche</title>
+  <link rel="stylesheet" href="../ui.css">
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <main>
+    <h1 data-i18n="settings_title"></h1>
+
+    <form id="form" novalidate>
+      <section>
+        <h2 data-i18n="settings_section_private"></h2>
+        <div class="field">
+          <label for="private-url" data-i18n="settings_private_url"></label>
+          <input id="private-url" type="url" inputmode="url" autocapitalize="off" autocorrect="off"
+                 spellcheck="false" placeholder="http://192.168.1.158:8092" aria-describedby="private-url-help private-url-error">
+          <p id="private-url-help" class="muted" data-i18n="settings_private_url_help"></p>
+          <p id="private-url-error" class="error" hidden></p>
+        </div>
+      </section>
+
+      <section>
+        <h2 data-i18n="settings_section_public"></h2>
+        <div class="field">
+          <label for="public-engine" data-i18n="settings_public_engine"></label>
+          <select id="public-engine"></select>
+        </div>
+        <div class="field" id="custom-url-field" hidden>
+          <label for="custom-url" data-i18n="settings_public_custom_url"></label>
+          <input id="custom-url" type="url" inputmode="url" autocapitalize="off" autocorrect="off"
+                 spellcheck="false" placeholder="https://example.com/search?q={q}" aria-describedby="custom-url-help custom-url-error">
+          <p id="custom-url-help" class="muted" data-i18n="settings_public_custom_url_help"></p>
+          <p id="custom-url-error" class="error" hidden></p>
+        </div>
+      </section>
+
+      <section>
+        <h2 data-i18n="settings_section_interception"></h2>
+        <fieldset class="field" aria-describedby="engines-help engines-error">
+          <legend data-i18n="settings_intercepted_engines"></legend>
+          <div id="engines" class="checks"></div>
+          <p id="engines-help" class="muted" data-i18n="settings_intercepted_engines_help"></p>
+          <p id="engines-error" class="error" hidden></p>
+        </fieldset>
+        <div class="field">
+          <label class="check">
+            <input id="only-address-bar" type="checkbox" aria-describedby="only-address-bar-help">
+            <span data-i18n="settings_only_address_bar"></span>
+          </label>
+          <p id="only-address-bar-help" class="muted" data-i18n="settings_only_address_bar_help"></p>
+        </div>
+      </section>
+
+      <details>
+        <summary data-i18n="settings_section_advanced"></summary>
+        <div class="field">
+          <label for="search-path" data-i18n="settings_search_path"></label>
+          <input id="search-path" type="text" autocapitalize="off" autocorrect="off" spellcheck="false"
+                 aria-describedby="search-path-help search-path-error">
+          <p id="search-path-help" class="muted" data-i18n="settings_search_path_help"></p>
+          <p id="search-path-error" class="error" hidden></p>
+        </div>
+        <div class="field">
+          <label for="probe-path" data-i18n="settings_probe_path"></label>
+          <input id="probe-path" type="text" autocapitalize="off" autocorrect="off" spellcheck="false"
+                 aria-describedby="probe-path-help probe-path-error">
+          <p id="probe-path-help" class="muted" data-i18n="settings_probe_path_help"></p>
+          <p id="probe-path-error" class="error" hidden></p>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="probe-timeout" data-i18n="settings_probe_timeout"></label>
+            <input id="probe-timeout" type="number" inputmode="numeric" min="200" max="5000" step="50"
+                   aria-describedby="probe-timeout-error">
+            <p id="probe-timeout-error" class="error" hidden></p>
+          </div>
+          <div class="field">
+            <label for="probe-interval" data-i18n="settings_probe_interval"></label>
+            <input id="probe-interval" type="number" inputmode="numeric" min="1" max="60" step="1"
+                   aria-describedby="probe-interval-error">
+            <p id="probe-interval-error" class="error" hidden></p>
+          </div>
+        </div>
+      </details>
+
+      <div class="submit">
+        <button type="submit" class="primary" data-i18n="settings_save"></button>
+        <span id="saved" class="muted" role="status"></span>
+      </div>
+    </form>
+  </main>
+  <script type="module" src="settings.js"></script>
+</body>
+</html>

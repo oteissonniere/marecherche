@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ma recherche</title>
+  <link rel="stylesheet" href="../ui.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <section class="status" aria-live="polite">
+      <span id="led" class="led idle" aria-hidden="true"></span>
+      <div>
+        <div id="status-text" class="status-text" data-i18n="popup_status_unknown"></div>
+        <div id="status-detail" class="muted"></div>
+      </div>
+    </section>
+
+    <fieldset class="modes">
+      <legend data-i18n="popup_mode_label"></legend>
+      <label><input type="radio" name="mode" value="auto"><span data-i18n="popup_mode_auto"></span></label>
+      <label><input type="radio" name="mode" value="force-private"><span data-i18n="popup_mode_private"></span></label>
+      <label><input type="radio" name="mode" value="force-public"><span data-i18n="popup_mode_public"></span></label>
+    </fieldset>
+
+    <p id="error" class="error" hidden></p>
+
+    <div class="actions">
+      <button id="test" type="button" data-i18n="popup_test_button"></button>
+      <button id="settings" type="button" data-i18n="popup_settings_link"></button>
+    </div>
+  </main>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
