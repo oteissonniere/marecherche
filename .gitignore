@@ -16,3 +16,6 @@ webext/node_modules/
 
 # Local signing settings (copy Config/Local.xcconfig.example)
 Config/Local.xcconfig
+
+# Local coding-agent state (history, cache)
+.swival/
