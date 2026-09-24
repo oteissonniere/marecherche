@@ -1,6 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { extractPrivateQuery, buildPublicUrl, privateOrigin } from "../src/lib/url.js";
+import {
+  extractPrivateQuery, extractPublicQuery, extractInterceptedQuery, buildPrivateUrl, buildPublicUrl, privateOrigin
+} from "../src/lib/url.js";
 import { normalizeConfig } from "../src/lib/config.js";
 
 const config = normalizeConfig({});
@@ -37,4 +39,26 @@ test("a private engine hosted under a sub-path is supported", () => {
 
 test("buildPublicUrl substitutes {q} once", () => {
   assert.equal(buildPublicUrl(config, "caf%C3%A9"), "https://www.qwant.com/?q=caf%C3%A9");
+});
+
+test("extractPublicQuery recognises the configured public engine only", () => {
+  assert.equal(extractPublicQuery(config, "https://www.qwant.com/?q=caf%C3%A9"), "caf%C3%A9");
+  assert.equal(extractPublicQuery(config, "https://www.qwant.com/?t=web&q=chat"), "chat");
+  assert.equal(extractPublicQuery(config, "https://www.qwant.com/maps?q=chat"), null);
+  assert.equal(extractPublicQuery(config, "https://duckduckgo.com/?q=chat"), null);
+  const custom = normalizeConfig({ publicEngineId: "custom", publicCustomUrl: "https://s.example/find?query={q}" });
+  assert.equal(extractPublicQuery(custom, "https://s.example/find?query=chat"), "chat");
+});
+
+test("extractInterceptedQuery matches what the redirect rules match", () => {
+  assert.equal(extractInterceptedQuery(config, "https://www.google.com/search?q=hello+world&client=safari"), "hello+world");
+  assert.equal(extractInterceptedQuery(config, "https://www.google.com/search?q=hello+world"), null); // no signature
+  const everything = normalizeConfig({ onlyAddressBar: false });
+  assert.equal(extractInterceptedQuery(everything, "https://www.google.com/search?q=hello"), "hello");
+  const bingOnly = normalizeConfig({ interceptedEngineIds: ["bing"] });
+  assert.equal(extractInterceptedQuery(bingOnly, "https://www.google.com/search?q=x&client=safari"), null);
+});
+
+test("buildPrivateUrl substitutes {q} into the private template", () => {
+  assert.equal(buildPrivateUrl(config, "caf%C3%A9"), "http://192.168.1.158:8092/search?q=caf%C3%A9");
 });

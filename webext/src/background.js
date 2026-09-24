@@ -2,8 +2,10 @@ import { browser } from "./lib/browser.js";
 import { CONFIG_KEY, loadConfig, saveConfig, loadState, saveState, validateConfig } from "./lib/config.js";
 import { buildRules, allRuleIds } from "./lib/rules.js";
 import { probe } from "./lib/probe.js";
-import { decideTarget } from "./lib/decision.js";
-import { extractPrivateQuery, buildPublicUrl } from "./lib/url.js";
+import { decideTarget, needsConfirmation, confirmationTimeout } from "./lib/decision.js";
+import {
+  extractPrivateQuery, extractPublicQuery, extractInterceptedQuery, buildPrivateUrl, buildPublicUrl
+} from "./lib/url.js";
 
 const ALARM_NAME = "probe";
 const storage = browser.storage.local;
@@ -29,7 +31,12 @@ async function applyRules(config, target) {
 // Probe, decide, apply. Returns the new state.
 async function refresh(reason, { forceApply = false } = {}) {
   const config = await loadConfig(storage);
-  const reachable = await probe(config);
+  const { activeTarget } = await loadState(storage);
+  let reachable = await probe(config);
+  if (needsConfirmation(config, activeTarget, reachable)) {
+    reachable = await probe(config, fetch, confirmationTimeout(config));
+    if (reachable) console.log(`[marecherche] refresh(${reason}) transient probe failure ignored`);
+  }
   const target = decideTarget(config, reachable);
   const previous = await saveState(storage, { reachable, checkedAt: Date.now() });
   if (forceApply || previous.activeTarget !== target) await applyRules(config, target);
@@ -47,8 +54,7 @@ async function ensureAlarm() {
 // unreachability: confirm with a second, more patient probe before bouncing the user.
 async function confirmedUnreachable(config) {
   if (await probe(config)) return false;
-  const retryTimeout = Math.min(config.probeTimeoutMs * 3, 5000);
-  return !(await probe(config, fetch, retryTimeout));
+  return !(await probe(config, fetch, confirmationTimeout(config)));
 }
 
 // Redirect a tab that is heading to the unreachable private engine.
@@ -59,6 +65,21 @@ async function fallBackToPublic(config, tabId, encodedQuery, reason) {
   await saveState(storage, { reachable: false, checkedAt: Date.now() });
   await applyRules(config, "public");
   await browser.tabs.update(tabId, { url: buildPublicUrl(config, encodedQuery) });
+}
+
+// Upgrade: a search is heading to the public engine but the private engine may be back.
+// On iOS the background is suspended and alarms are unreliable, so the search itself is
+// the only dependable signal that the network may have changed (e.g. back on home Wi-Fi).
+async function tryUpgradeToPrivate(config, tabId, encodedQuery, timeoutMs, reason) {
+  if (config.mode !== "auto") return;
+  const { activeTarget } = await loadState(storage);
+  if (activeTarget !== "public") return;
+  const reachable = await probe(config, fetch, timeoutMs);
+  await saveState(storage, { reachable, checkedAt: Date.now() });
+  if (!reachable) return;
+  console.log(`[marecherche] private engine back, upgrading (${reason})`);
+  await applyRules(config, "private");
+  await browser.tabs.update(tabId, { url: buildPrivateUrl(config, encodedQuery) });
 }
 
 // Lifecycle.
@@ -91,6 +112,12 @@ browser.webNavigation.onBeforeNavigate.addListener((details) => {
   if (details.frameId !== 0) return;
   enqueue(async () => {
     const config = await loadConfig(storage);
+    const outbound = extractPublicQuery(config, details.url) ?? extractInterceptedQuery(config, details.url);
+    if (outbound !== null) {
+      // Before (intercepted engine URL) or after (public engine URL) the DNR redirect.
+      await tryUpgradeToPrivate(config, details.tabId, outbound, config.probeTimeoutMs, "onBeforeNavigate");
+      return;
+    }
     if (config.mode === "force-private") return;
     const query = extractPrivateQuery(config, details.url);
     if (query === null) return;
@@ -109,6 +136,14 @@ browser.webNavigation.onErrorOccurred?.addListener((details) => {
   if (details.frameId !== 0) return;
   enqueue(async () => {
     const config = await loadConfig(storage);
+    const outbound = extractPublicQuery(config, details.url);
+    if (outbound !== null) {
+      // The public engine failed to load, typically while the network is switching.
+      // The patient timeout gives a Wi-Fi that is still associating a chance to answer.
+      console.log(`[marecherche] onErrorOccurred ${details.url}: ${details.error}`);
+      await tryUpgradeToPrivate(config, details.tabId, outbound, confirmationTimeout(config), "public engine error");
+      return;
+    }
     if (config.mode === "force-private") return;
     const query = extractPrivateQuery(config, details.url);
     if (query === null) return;
