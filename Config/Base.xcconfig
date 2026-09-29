@@ -1,0 +1,4 @@
+// Tracked base configuration, applied to every target.
+// Per-developer settings (DEVELOPMENT_TEAM) live in the git-ignored Local.xcconfig, copied
+// from Local.xcconfig.example. The optional include keeps fresh clones and CI buildable.
+#include? "Local.xcconfig"

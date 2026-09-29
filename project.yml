@@ -8,13 +8,12 @@ options:
     macOS: "14.0"
   xcodeVersion: "16.0"
   generateEmptyDirectories: true
-  # Config/Local.xcconfig is git-ignored; the project must still generate without it.
-  disabledValidations: [missingConfigFiles]
 
-# Per-developer settings (DEVELOPMENT_TEAM) live outside the repository.
+# Base.xcconfig optionally includes the git-ignored Local.xcconfig (DEVELOPMENT_TEAM), so a
+# fresh clone or CI builds without it. Referencing Local.xcconfig directly fails the build.
 configFiles:
-  Debug: Config/Local.xcconfig
-  Release: Config/Local.xcconfig
+  Debug: Config/Base.xcconfig
+  Release: Config/Base.xcconfig
 
 settings:
   base:
@@ -22,7 +21,7 @@ settings:
     MARKETING_VERSION: "0.1.0"
     CURRENT_PROJECT_VERSION: "1"
     CODE_SIGN_STYLE: Automatic
-    # DEVELOPMENT_TEAM comes from Config/Local.xcconfig (see configFiles above).
+    # DEVELOPMENT_TEAM comes from Config/Local.xcconfig, included by Config/Base.xcconfig.
 
 targetTemplates:
   AppBase:
