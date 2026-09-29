@@ -88,6 +88,20 @@ test("iPhone address-bar URLs captured on device are intercepted", () => {
     "https://www.google.com/search?q=hello+world&ie=UTF-8&oe=UTF-8&hl=fr-fr&client=safari"), "hello+world");
 });
 
+test("iPad address-bar URLs captured on the simulator are intercepted", () => {
+  // Captured on the iPad Pro 11-inch simulator, iPadOS 27 (docs/engine-signatures.md).
+  const cases = [
+    ["google", "https://www.google.com/search?q=hello&ie=UTF-8&oe=UTF-8&hl=fr-fr&client=safari", "hello"],
+    ["yahoo", "https://fr.search.yahoo.com/search?p=hello&fr=ipad", "hello"],
+    ["bing", "https://www.bing.com/search?q=plokij&form=APIPA1&PC=APPD", "plokij"],
+    ["duckduckgo", "https://duckduckgo.com/?q=plokij&t=ipad&ia=web", "plokij"],
+    ["ecosia", "https://www.ecosia.org/search?q=plokij&tts=st_asaf_ipad", "plokij"]
+  ];
+  for (const [engineId, url, expected] of cases) {
+    assert.equal(capture(INTERCEPTED_ENGINES[engineId], true, url), expected, url);
+  }
+});
+
 test("macOS address-bar signatures are still intercepted", () => {
   assert.equal(capture(INTERCEPTED_ENGINES.ecosia, true,
     "https://www.ecosia.org/search?tts=st_asaf_macos&q=safari+themes"), "safari+themes");

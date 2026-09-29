@@ -35,12 +35,22 @@ The first guesses for Yahoo (`fr=aapl`) and Ecosia (`tts=st_asaf_ios`) were wron
 the signature differed, host, path and query parameter matched. After the fix, Olivier
 verified on iPhone that address-bar searches with all five engines are redirected.
 
-## iPad — untested
+## iPad — captured on the simulator
 
-Values may differ from the iPhone ones. The catalog carries two unverified guesses
-(`form=APIPA1` for Bing, `t=ipad` for DuckDuckGo); Google (`client=safari`) is likely
-shared. Capture Yahoo and Ecosia (e.g. `fr=ipad`, `tts=st_asaf_ipad`?) with the procedure
-below before relying on them.
+Captured 2026-09-29 on the iPad Pro 11-inch simulator (iPadOS 27), extension not
+installed, by typing a query in Safari's address bar and reading the URL from Safari's
+history database.
+
+| Engine | URL observed | Signature |
+|---|---|---|
+| Google | `https://www.google.com/search?q=hello&ie=UTF-8&oe=UTF-8&hl=fr-fr&client=safari` | `client=safari` |
+| Yahoo | `https://fr.search.yahoo.com/search?p=hello&fr=ipad` | `fr=ipad` |
+| Bing | `https://www.bing.com/search?q=plokijplokij&form=APIPA1&PC=APPD` | `form=APIPA1` |
+| DuckDuckGo | `https://duckduckgo.com/?q=plokijplokij&t=ipad&ia=web` | `t=ipad` |
+| Ecosia | `https://www.ecosia.org/search?q=plokijplokij&tts=st_asaf_ipad` | `tts=st_asaf_ipad` |
+
+Yahoo and Ecosia differ from the iPhone values and were missing from the catalog; Bing
+and DuckDuckGo confirmed earlier guesses. Not yet verified on a physical iPad.
 
 ## Former iOS placeholder table (superseded)
 
