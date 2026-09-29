@@ -6,6 +6,7 @@ design/icon/layers/; Xcode renders it for every platform, size and appearance, a
 generates images for OS versions without Liquid Glass. This script produces the rest:
 
 - In-app logo: the four layers flattened into a square (the SwiftUI view rounds it).
+- Popup header icon: the same flattened square at 48, 96 and 144 px (the CSS rounds it).
 - Safari extension icons: design/icon/toolbar.svg, no text, 16 to 512 px.
 
 Also writes design/icon/app-icon.svg (the flattened square icon) for the README.
@@ -22,6 +23,7 @@ LAYERS = sorted((DESIGN / "layers").glob("*.svg"))
 WEBEXT_ICONS = ROOT / "webext" / "src" / "icons"
 ASSETS = ROOT / "App" / "Assets.xcassets"
 WEBEXT_SIZES = [16, 32, 48, 64, 96, 128, 256, 512]
+POPUP_ICON_SIZES = [48, 96, 144]  # 1x, 2x, 3x sources for the 36 px header icon (oversampled)
 
 
 def svg_body(path):
@@ -62,6 +64,9 @@ def main():
         name = f"logo@{scale}x.png"
         jobs.append((square_svg, logo / name, 64 * scale, "opaque"))
         logo_images.append({"filename": name, "idiom": "universal", "scale": f"{scale}x"})
+
+    for size in POPUP_ICON_SIZES:
+        jobs.append((square_svg, WEBEXT_ICONS / f"app-icon-{size}.png", size, "opaque"))
 
     toolbar_svg = DESIGN / "toolbar.svg"
     for size in WEBEXT_SIZES:

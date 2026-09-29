@@ -7,6 +7,15 @@ body { width: 320px; max-width: 100%; }
 
 main { padding: 16px; display: grid; gap: 14px; }
 
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand img { flex: none; border-radius: 22.5%; }
+.brand-name { font-size: 17px; font-weight: 600; }
+
+/* The iPhone sheet already shows the extension name as its title: keep the icon only. */
+@media (max-width: 480px) and (hover: none) {
+  .brand-name { display: none; }
+}
+
 .status { display: flex; align-items: center; gap: 12px; }
 .status-text { font-weight: 600; }
 
