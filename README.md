@@ -1,15 +1,32 @@
 # Ma recherche
 
-A Safari Web Extension for iOS and macOS that sends your address-bar searches to **your
-own SearXNG instance** — and to a public engine of your choice whenever that instance is
-not reachable (away from home, VPN down).
+**Use the search engine you choose in Safari — including a private one running at home —
+and never lose search when it is out of reach.**
 
-Safari does not let you add a custom search engine. Like other extensions of this kind,
-Ma recherche works around that by redirecting the searches Safari sends to its built-in
-engines (Google, Bing, DuckDuckGo, Yahoo, Ecosia).
+Ma recherche is a Safari Web Extension for iOS and macOS. It sends your address-bar
+searches to the engine of your choice. It is built for a **self-hosted, private engine**
+such as a [SearXNG](https://github.com/searxng/searxng) instance on your home network,
+and backs it with a **mainstream fallback** (Qwant, DuckDuckGo, Brave, Startpage, Google,
+Bing, Ecosia, or any URL you provide).
 
-> Status: early development. See [docs/reports/M0.md](docs/reports/M0.md) for what has
-> been verified and what still needs testing on real devices.
+## Why this one
+
+Safari does not let you add a custom search engine, so extensions of this kind redirect
+the searches Safari sends to its built-in engines. They send every search to **one fixed
+engine**. That is fine for a public service, but a private instance is only reachable at
+home or over a VPN: away from it, every search fails.
+
+Ma recherche **checks** whether your private engine answers and **switches** by itself:
+
+- **At home or on your VPN**, searches go to your private engine.
+- **Away**, they go to your fallback engine, with no error page and no setting to change.
+- **Back home**, the very first search goes to your private engine again.
+
+The check is a plain request to the engine itself. The extension needs no Wi-Fi name,
+no VPN status and no location permission: what matters is whether your engine answers.
+
+> Status: working on macOS and iPhone, built from source; not yet on the App Store.
+> See [docs/reports/M0.md](docs/reports/M0.md) for what has been verified on devices.
 
 ## How it works
 
