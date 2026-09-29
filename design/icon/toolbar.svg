@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Safari toolbar and extension icon (16 to 512 px): no text, heavier strokes so the
+       loupe survives at 16 px. Rounded here because Safari does not mask extension icons. -->
+  <defs>
+    <linearGradient id="mr-tb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6366F1"/>
+      <stop offset="0.5" stop-color="#3B82F6"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="230" fill="url(#mr-tb)"/>
+  <g fill="none" stroke="#FFFFFF">
+    <circle cx="452" cy="452" r="230" stroke-width="96"/>
+    <line x1="649" y1="649" x2="812" y2="812" stroke-width="110" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- "mr" drawn as geometric strokes (no font, so no font licence and no text to outline).
+       x-height 150 (y 361 to 511), stroke 44, centred on the lens (448, 436). -->
+  <path fill="none" stroke="#0F172A" stroke-width="44" stroke-linecap="butt" stroke-linejoin="round"
+        d="M305 511 V425 A42 42 0 0 1 389 425 V511
+           M389 425 A42 42 0 0 1 473 425 V511
+           M543 511 V425 A42 42 0 0 1 585 383 H613"/>
+</svg>
