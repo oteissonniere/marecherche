@@ -3,11 +3,11 @@
 **Use the search engine you choose in Safari — including a private one running at home —
 and never lose search when it is out of reach.**
 
-Ma recherche is a Safari Web Extension for iOS and macOS. It sends your address-bar
-searches to the engine of your choice. It is built for a **self-hosted, private engine**
-such as a [SearXNG](https://github.com/searxng/searxng) instance on your home network,
-and backs it with a **mainstream fallback** (Qwant, DuckDuckGo, Brave, Startpage, Google,
-Bing, Ecosia, or any URL you provide).
+Ma recherche is a Safari Web Extension for iPhone (iOS), iPad (iPadOS) and Mac (macOS).
+It sends your address-bar searches to the engine of your choice. It is built for a
+**self-hosted, private engine** such as a [SearXNG](https://github.com/searxng/searxng)
+instance on your home network, and backs it with a **mainstream fallback** (Qwant,
+DuckDuckGo, Brave, Startpage, Google, Bing, Ecosia, or any URL you provide).
 
 ## Why this one
 
@@ -25,7 +25,8 @@ Ma recherche **checks** whether your private engine answers and **switches** by 
 The check is a plain request to the engine itself. The extension needs no Wi-Fi name,
 no VPN status and no location permission: what matters is whether your engine answers.
 
-> Status: working on macOS and iPhone, built from source; not yet on the App Store.
+> Status: working on Mac and iPhone, built from source; iPad verified on the simulator;
+> not yet on the App Store.
 > See [docs/reports/M0.md](docs/reports/M0.md) for what has been verified on devices.
 
 ## How it works
@@ -49,6 +50,11 @@ no VPN status and no location permission: what matters is whether your engine an
 Search suggestions shown while you type still come from Safari's selected engine; an
 extension cannot replace them. You can turn them off in Safari's Search settings.
 
+Supported default engines are the five Safari offers in most regions: Google, Bing, Yahoo,
+DuckDuckGo and Ecosia, on any language or country domain (google.co.uk,
+uk.search.yahoo.com…). Region-specific engines that Safari offers in some countries
+(for example Baidu in China or Yahoo! JAPAN) are not intercepted yet.
+
 **Tip:** with Tailscale, *VPN On Demand* with your home Wi-Fi in "Except On" makes a
 private instance reachable everywhere, and the fallback then only covers real outages.
 
@@ -60,8 +66,8 @@ private instance reachable everywhere, and the fallback then only covers real ou
    (e.g. `http://192.168.1.158:8092`) and pick the public fallback engine.
 3. The popup shows where searches currently go, lets you force a mode, and re-test.
 
-Safari syncs the extension itself across your devices (same bundle identifier on iOS and
-macOS), but **not its settings**: configure the instance URL on each device.
+Safari syncs the extension itself across your devices (same bundle identifier on iOS,
+iPadOS and macOS), but **not its settings**: configure the instance URL on each device.
 
 ## Development
 
@@ -70,7 +76,7 @@ Requirements: Xcode 16+, [`xcodegen`](https://github.com/yonaskolb/XcodeGen), No
 ```bash
 cp Config/Local.xcconfig.example Config/Local.xcconfig   # then put your team id in it
 xcodegen generate            # creates MaRecherche.xcodeproj (git-ignored)
-open MaRecherche.xcodeproj   # run the iOS or macOS scheme
+open MaRecherche.xcodeproj   # run the iOS scheme (iPhone and iPad) or the macOS one
 ```
 
 ```bash
