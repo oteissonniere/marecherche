@@ -1,6 +1,10 @@
 # Icon sources
 
-Every icon of the project is generated from the SVG files in this folder:
+The app icon is **`App/AppIcon.icon`**, an Icon Composer file built from the layers in
+this folder. Xcode renders it for every platform, size and appearance, and generates
+images for the OS versions without Liquid Glass (macOS 14–15, iOS and iPadOS 17–18).
+
+The other icons (in-app logo, Safari extension icons) are generated from the SVG files:
 
 ```bash
 python3 scripts/make_icons.py
@@ -8,18 +12,16 @@ python3 scripts/make_icons.py
 
 | File | Used for |
 |---|---|
-| `layers/1-background.svg` | App icon: full-bleed, opaque gradient |
+| `layers/1-background.svg` | Flattened logo only; in Icon Composer the background is the icon's own gradient fill |
 | `layers/2-lens.svg` | App icon: translucent lens |
 | `layers/3-loupe.svg` | App icon: ring and handle |
 | `layers/4-monogram.svg` | App icon: "mr", drawn as strokes (no font involved) |
 | `toolbar.svg` | Safari toolbar and extension icons, 16 to 512 px (no text, heavier strokes) |
 | `app-icon.svg` | Generated: the four layers flattened, used by the README |
 
-The script composes the layers into a square icon for iOS and iPadOS (the system applies
-the rounded mask), a rounded icon on the macOS 11–15 grid for macOS, the in-app logo, and
-the extension icons. The macOS 16 and 32 pt sizes leave out the monogram, which is
-illegible there (Finder list view, Spotlight, menus); from 128 pt it is kept. Rendering uses AppKit (`scripts/render_svg.swift`), so it needs
-macOS with Xcode and no other tool.
+The script flattens the layers into the in-app logo and renders the extension icons.
+Rendering uses AppKit (`scripts/render_svg.swift`), so it needs macOS with Xcode and no
+other tool.
 
 ## Design rules (Apple Human Interface Guidelines, App icons)
 
@@ -29,16 +31,15 @@ macOS with Xcode and no other tool.
 - No live text: the monogram is a path, so rendering never depends on an installed font.
 - Content stays centred, clear of the corners the mask removes.
 
-## Liquid Glass icon (iOS, iPadOS and macOS 26 and later)
+## Editing the app icon
 
-The PNG icons are flattened and look right everywhere. For the full Liquid Glass
-treatment and the dark, clear and tinted appearances, build an Icon Composer file:
+Open `App/AppIcon.icon` in Icon Composer (Xcode → Open Developer Tool → Icon Composer).
+Current settings:
 
-1. Open Icon Composer (Xcode → Open Developer Tool → Icon Composer).
-2. Set the background to the gradient `#6366F1 → #3B82F6 → #06B6D4` (top-left to
-   bottom-right), or import `layers/1-background.svg`.
-3. Import `2-lens.svg`, `3-loupe.svg` and `4-monogram.svg` as foreground layers, in
-   that order. Tune the lens translucency and the glass effects there.
-4. Check the dark, clear and tinted previews, then save as `App/AppIcon.icon`.
-5. Add the `.icon` file to the app targets in `project.yml` and set
-   `ASSETCATALOG_COMPILER_APPICON_NAME` accordingly.
+- background: the icon's gradient fill, `#6366F1` → `#06B6D4`, top to bottom;
+- groups, front to back: `4-monogram` (Liquid Glass off, so the letters stay crisp),
+  `3-loupe`, `2-lens`.
+
+To change the artwork, edit the SVG layer here, then use Replace in the Image pop-up of
+the layer in Icon Composer. Icon Composer renders every size from one design, so "mr"
+is not legible in the 16 and 32 pt macOS sizes (Finder list view, Spotlight, menus).
