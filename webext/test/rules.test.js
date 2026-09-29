@@ -74,6 +74,21 @@ test("yahoo uses p= and duckduckgo matches the root path", () => {
   assert.equal(capture(INTERCEPTED_ENGINES.duckduckgo, true, "https://duckduckgo.com/?q=a+b&t=osx"), "a+b");
 });
 
+test("iPhone address-bar URLs captured on device are intercepted", () => {
+  // Captured on an iPhone with the extension disabled (docs/engine-signatures.md).
+  assert.equal(capture(INTERCEPTED_ENGINES.ecosia, true,
+    "https://www.ecosia.org/search?q=hello+world&tts=st_asaf_iphone"), "hello+world");
+  assert.equal(capture(INTERCEPTED_ENGINES.yahoo, true,
+    "https://fr.search.yahoo.com/search?p=hello+world&fr=iphone&.tsrc=apple"), "hello+world");
+});
+
+test("macOS address-bar signatures are still intercepted", () => {
+  assert.equal(capture(INTERCEPTED_ENGINES.ecosia, true,
+    "https://www.ecosia.org/search?tts=st_asaf_macos&q=safari+themes"), "safari+themes");
+  assert.equal(capture(INTERCEPTED_ENGINES.yahoo, true,
+    "https://search.yahoo.com/search?p=chat&fr=aaplw"), "chat");
+});
+
 test("loop guard: public target never redirects an engine to itself", () => {
   const config = normalizeConfig({ publicEngineId: "google" });
   const googleIds = new Set(regexFiltersFor(INTERCEPTED_ENGINES.google, true).map((f) => f.id));

@@ -21,7 +21,25 @@ which encodes exactly this mapping:
 | DuckDuckGo | `duckduckgo.` | `q` | `t=osx` |
 | Ecosia | `ecosia.` | `q` | `tts=st_asaf_macos` |
 
-## iOS / iPadOS — PROVISIONAL, to capture
+## iPhone
+
+| Engine | Status | URL observed (extension disabled) | Signature |
+|---|---|---|---|
+| Google | verified | redirect works | `client=safari` |
+| Yahoo | captured 2026-09-29 | `https://fr.search.yahoo.com/search?p=hello+world&fr=iphone&.tsrc=apple` | `fr=iphone` |
+| Ecosia | captured 2026-09-29 | `https://www.ecosia.org/search?q=hello+world&tts=st_asaf_iphone` | `tts=st_asaf_iphone` |
+| Bing | intercepted, parameter not captured | — | one of `form=APIPA1` / `form=APIPH1` |
+| DuckDuckGo | intercepted, parameter not captured | — | `t=iphone` |
+
+The first guesses for Yahoo (`fr=aapl`) and Ecosia (`tts=st_asaf_ios`) were wrong; only
+the signature differed, host, path and query parameter matched.
+
+## iPad — untested
+
+Values may differ from the iPhone ones (e.g. `fr=ipad`, `tts=st_asaf_ipad`); capture them
+with the procedure below before relying on them.
+
+## Former iOS placeholder table (superseded)
 
 Procedure (SPEC.md Section 8): extension disabled, engine set as Safari default, search
 `hello world` from the address bar, copy the resulting URL.

@@ -1,7 +1,9 @@
 // Safari's built-in engines we intercept.
 // `signatures` = query params Safari adds for address-bar searches, per platform.
-// macOS values confirmed against Qwant for Safari's preconfigured-search-engines.json
-// (see docs/engine-signatures.md). iOS values are still PROVISIONAL.
+// macOS values: confirmed against Qwant for Safari's preconfigured-search-engines.json and
+// on device. iPhone values: captured on device for Google, Yahoo and Ecosia; Bing and
+// DuckDuckGo are intercepted on iPhone but their exact parameter was not captured.
+// iPad values are untested. See docs/engine-signatures.md.
 export const INTERCEPTED_ENGINES = Object.freeze({
   google: {
     id: "google", nameKey: "engine_google",
@@ -14,25 +16,25 @@ export const INTERCEPTED_ENGINES = Object.freeze({
     id: "bing", nameKey: "engine_bing",
     hostPattern: "www\\.bing\\.com",
     path: "/search", queryParam: "q",
-    signatures: ["form=APMCS1", "form=APIPA1", "form=APIPH1"] // macOS confirmed; iOS PROVISIONAL
+    signatures: ["form=APMCS1", "form=APIPA1", "form=APIPH1"]
   },
   duckduckgo: {
     id: "duckduckgo", nameKey: "engine_duckduckgo",
     hostPattern: "duckduckgo\\.com",
     path: "/", queryParam: "q",
-    signatures: ["t=osx", "t=iphone", "t=ipad"] // macOS confirmed; iOS PROVISIONAL
+    signatures: ["t=osx", "t=iphone", "t=ipad"]
   },
   yahoo: {
     id: "yahoo", nameKey: "engine_yahoo",
     hostPattern: "(?:[a-z]+\\.)?search\\.yahoo\\.com",
     path: "/search", queryParam: "p",
-    signatures: ["fr=aaplw", "fr=aapl"] // macOS confirmed; iOS PROVISIONAL
+    signatures: ["fr=aaplw", "fr=iphone"] // macOS, iPhone
   },
   ecosia: {
     id: "ecosia", nameKey: "engine_ecosia",
     hostPattern: "www\\.ecosia\\.org",
     path: "/search", queryParam: "q",
-    signatures: ["tts=st_asaf_macos", "tts=st_asaf_ios"] // macOS confirmed; iOS PROVISIONAL
+    signatures: ["tts=st_asaf_macos", "tts=st_asaf_iphone"] // macOS, iPhone
   }
 });
 
