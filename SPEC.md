@@ -14,7 +14,7 @@ This document is the single source of truth for the coding agent. Read Section 0
 > **Implementation status.** M1 and M2 code is in place; see `docs/reports/M0.md` for what
 > was verified and for the on-device `VERIFY` checklist. Where this spec was wrong, it has
 > been corrected in place and the change is listed in that report. The code blocks in
-> Sections 5 and 7.10 are illustrative: `project.yml` and `webext/src/background.js` are
+> Sections 5 and 7.10 are illustrative: `project.yml` and `webext/src/lib/controller.js` are
 > authoritative.
 
 ---
@@ -795,8 +795,12 @@ The agent may use **only** these (via the `browser` shim):
 
 ### 7.10 Background (`background.js`)
 
+`background.js` only creates the controller and registers its listeners; the logic lives in
+`lib/controller.js` (`createController({ browser, fetchImpl })`), which takes the WebExtension
+API and `fetch` as parameters so `test/controller.test.js` can drive it with fakes.
+
 Two invariants the implementation must keep (the listing below predates them; the file
-`webext/src/background.js` is authoritative):
+`webext/src/lib/controller.js` is authoritative):
 
 - **Switch the rules before navigating.** In the self-heal path, call
   `applyRules(config, "public")` *before* `tabs.update(...)`. Otherwise, when the public
