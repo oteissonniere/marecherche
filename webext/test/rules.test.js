@@ -102,6 +102,24 @@ test("iPad address-bar URLs captured on the simulator are intercepted", () => {
   }
 });
 
+test("language and region variants of the same engines are intercepted", () => {
+  // Built from the captured URLs by changing only what depends on language or region:
+  // Google's hl parameter and country domain, Yahoo's country subdomain.
+  const cases = [
+    ["google", "https://www.google.com/search?q=hello&ie=UTF-8&oe=UTF-8&hl=en-us&client=safari"],
+    ["google", "https://www.google.co.uk/search?q=hello&ie=UTF-8&oe=UTF-8&hl=en-gb&client=safari"],
+    ["google", "https://www.google.de/search?q=hello&ie=UTF-8&oe=UTF-8&hl=de-de&client=safari"],
+    ["yahoo", "https://search.yahoo.com/search?p=hello&fr=iphone&.tsrc=apple"],
+    ["yahoo", "https://uk.search.yahoo.com/search?p=hello&fr=aaplw"],
+    ["bing", "https://www.bing.com/search?q=hello&form=APMCS1&PC=APMC&setlang=en"],
+    ["duckduckgo", "https://duckduckgo.com/?q=hello&t=osx&kl=us-en"],
+    ["ecosia", "https://www.ecosia.org/search?q=hello&tts=st_asaf_macos"]
+  ];
+  for (const [engineId, url] of cases) {
+    assert.equal(capture(INTERCEPTED_ENGINES[engineId], true, url), "hello", url);
+  }
+});
+
 test("macOS address-bar signatures are still intercepted", () => {
   assert.equal(capture(INTERCEPTED_ENGINES.ecosia, true,
     "https://www.ecosia.org/search?tts=st_asaf_macos&q=safari+themes"), "safari+themes");
