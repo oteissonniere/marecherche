@@ -12,6 +12,7 @@ Storage lives in the page's memory; nothing here ships in the extension.
 import sys
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 SRC = Path(__file__).resolve().parent.parent / "webext" / "src"
 
@@ -77,8 +78,14 @@ class Handler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=str(SRC), **kwargs)
 
     def do_GET(self):
-        path = (SRC / self.path.split("?")[0].lstrip("/")).resolve()
-        if path.suffix == ".html" and path.is_file() and SRC in path.parents:
+        # Resolve the decoded request path and refuse anything outside webext/src before
+        # touching the file system (no "..", encoded or not, can escape SRC).
+        relative = unquote(urlsplit(self.path).path).lstrip("/")
+        path = (SRC / relative).resolve()
+        if not path.is_relative_to(SRC):
+            self.send_error(404)
+            return
+        if path.suffix == ".html" and path.is_file():
             body = path.read_text(encoding="utf-8").replace("<head>", "<head>" + STUB, 1).encode()
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
