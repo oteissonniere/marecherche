@@ -7,17 +7,15 @@ body { width: 320px; max-width: 100%; }
 
 main { padding: 16px; display: grid; gap: 14px; }
 
-.brand { display: flex; align-items: center; gap: 10px; }
-.brand img { flex: none; border-radius: 22.5%; }
-.brand-name { font-size: 17px; font-weight: 600; }
 
-/* The iPhone sheet already shows the extension name as its title: keep the icon only. */
-@media (max-width: 480px) and (hover: none) {
-  .brand-name { display: none; }
-}
-
-.status { display: flex; align-items: center; gap: 12px; }
-.status-text { font-weight: 600; }
+.status { display: grid; gap: 8px; }
+.status-title { display: flex; align-items: center; gap: 12px; }
+.status-title img { flex: none; border-radius: 22.5%; }
+.status-text { font-size: 17px; font-weight: 600; }
+/* The LED sits under the icon, centred on it, so both rows share one left column. */
+.status-detail { display: grid; grid-template-columns: 36px 1fr; column-gap: 12px; align-items: start; }
+/* 13 px text at 1.4 line height: a 3 px offset centres the 14 px LED on the first line. */
+.status-detail .led { justify-self: center; margin-top: 3px; }
 
 .led {
   flex: none;
@@ -26,8 +24,8 @@ main { padding: 16px; display: grid; gap: 14px; }
   border-radius: 50%;
   background: var(--idle);
 }
-.led.private { background: var(--ok); }
-.led.public { background: var(--warn); }
+.led.up { background: var(--ok); }
+.led.down { background: var(--error); }
 .led.checking { animation: pulse 0.9s ease-in-out infinite; }
 
 @keyframes pulse { 50% { opacity: 0.35; } }

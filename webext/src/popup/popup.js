@@ -26,7 +26,8 @@ function publicEngineName() {
 }
 
 function render(state) {
-  led.className = `led ${state.activeTarget === "private" ? "private" : state.activeTarget === "public" ? "public" : "idle"}`;
+  // The LED reports reachability (the detail line next to it); the title reports the target.
+  led.className = `led ${state.reachable === true ? "up" : state.reachable === false ? "down" : "idle"}`;
   statusText.textContent = state.activeTarget === "private"
     ? t("popup_status_private")
     : t("popup_status_public", [publicEngineName()]);

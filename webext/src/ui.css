@@ -9,7 +9,6 @@
   --accent: #0a6cff;
   --accent-text: #ffffff;
   --ok: #1f9d55;
-  --warn: #d9822b;
   --idle: #9a9aa2;
   --error: #c8322b;
 }
@@ -24,7 +23,6 @@
     --accent: #3d8bff;
     --accent-text: #ffffff;
     --ok: #34c472;
-    --warn: #f0a04b;
     --idle: #77777f;
     --error: #ff6b63;
   }

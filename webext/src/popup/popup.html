@@ -9,18 +9,17 @@
 </head>
 <body>
   <main>
-    <header class="brand">
-      <img src="../icons/app-icon-48.png"
-           srcset="../icons/app-icon-48.png 1x, ../icons/app-icon-96.png 2x, ../icons/app-icon-144.png 3x"
-           width="36" height="36" alt="">
-      <span class="brand-name" data-i18n="extension_name"></span>
-    </header>
-
     <section class="status" aria-live="polite">
-      <span id="led" class="led idle" aria-hidden="true"></span>
-      <div>
+      <!-- Title row: where searches go. Detail row: whether the private instance answers. -->
+      <div class="status-title">
+        <img src="../icons/app-icon-48.png"
+             srcset="../icons/app-icon-48.png 1x, ../icons/app-icon-96.png 2x, ../icons/app-icon-144.png 3x"
+             width="36" height="36" alt="">
         <div id="status-text" class="status-text" data-i18n="popup_status_unknown"></div>
-        <div id="status-detail" class="muted"></div>
+      </div>
+      <div class="status-detail">
+        <span id="led" class="led idle" aria-hidden="true"></span>
+        <span id="status-detail" class="muted"></span>
       </div>
     </section>
 
