@@ -12,6 +12,8 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+# Actions are pinned to a full commit SHA (a tag can be moved); Dependabot keeps the
+# pins up to date through pull requests (.github/dependabot.yml).
 jobs:
   build:
     # The app icon is an Icon Composer file (App/AppIcon.icon), which needs Xcode 26 or
@@ -19,9 +21,9 @@ jobs:
     runs-on: macos-26
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22
 

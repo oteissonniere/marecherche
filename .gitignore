@@ -22,3 +22,6 @@ Config/Local.xcconfig
 
 # CodeGraph index (local SQLite database and daemon files)
 .codegraph/
+
+# Python bytecode (scripts/)
+__pycache__/
