@@ -5,7 +5,9 @@
   image; the system applies the rounded mask.
 - App icon (macOS): the same artwork inside the rounded-rectangle grid used by
   pre-Liquid Glass macOS (824 px shape on a 1024 px canvas), so it looks right on
-  macOS 14 and 15. For macOS 26+, build an Icon Composer file from the layers.
+  macOS 14 and 15. The 16 and 32 pt sizes leave out the monogram, which is illegible
+  there (Finder list view, Spotlight, menus). For macOS 26+, build an Icon Composer
+  file from the layers.
 - In-app logo: the square app icon (the SwiftUI view rounds it).
 - Safari extension icons: design/icon/toolbar.svg, no text, 16 to 512 px.
 
@@ -25,6 +27,9 @@ WEBEXT_ICONS = ROOT / "webext" / "src" / "icons"
 ASSETS = ROOT / "App" / "Assets.xcassets"
 WEBEXT_SIZES = [16, 32, 48, 64, 96, 128, 256, 512]
 MAC_SIZES = [16, 32, 128, 256, 512]
+# macOS sizes (in points) rendered without the monogram layer.
+MAC_SIZES_WITHOUT_MONOGRAM = {16, 32}
+MONOGRAM_LAYER = "4-monogram.svg"
 
 # macOS 11-15 icon grid: 824 x 824 rounded rectangle centred on a 1024 x 1024 canvas.
 MAC_INSET = 100
@@ -48,8 +53,9 @@ def compose_square():
             f'width="1024" height="1024">\n{body}\n</svg>\n')
 
 
-def compose_macos():
-    body = "\n".join(svg_body(layer) for layer in LAYERS)
+def compose_macos(with_monogram=True):
+    layers = [layer for layer in LAYERS if with_monogram or layer.name != MONOGRAM_LAYER]
+    body = "\n".join(svg_body(layer) for layer in layers)
     return (
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">\n'
         f'<defs><clipPath id="mr-mac"><rect x="{MAC_INSET}" y="{MAC_INSET}" width="824" height="824" '
@@ -65,8 +71,8 @@ def write_json(path, payload):
 
 
 def main():
-    if len(LAYERS) != 4:
-        raise SystemExit(f"expected 4 layers in {DESIGN / 'layers'}, found {len(LAYERS)}")
+    if len(LAYERS) != 4 or LAYERS[-1].name != MONOGRAM_LAYER:
+        raise SystemExit(f"expected 4 layers ending with {MONOGRAM_LAYER} in {DESIGN / 'layers'}")
 
     square_svg = DESIGN / "app-icon.svg"
     square_svg.write_text(compose_square(), encoding="utf-8")
@@ -79,6 +85,8 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:
         mac_svg = Path(tmp) / "app-icon-macos.svg"
         mac_svg.write_text(compose_macos(), encoding="utf-8")
+        mac_small_svg = Path(tmp) / "app-icon-macos-small.svg"
+        mac_small_svg.write_text(compose_macos(with_monogram=False), encoding="utf-8")
         toolbar_svg = DESIGN / "toolbar.svg"
 
         jobs = [(square_svg, appicon / "icon-ios-1024.png", 1024, "opaque")]
@@ -87,7 +95,8 @@ def main():
             for scale in (1, 2):
                 px = points * scale
                 name = f"icon-mac-{points}@{scale}x.png"
-                jobs.append((mac_svg, appicon / name, px, "alpha"))
+                source = mac_small_svg if points in MAC_SIZES_WITHOUT_MONOGRAM else mac_svg
+                jobs.append((source, appicon / name, px, "alpha"))
                 images.append({"filename": name, "idiom": "mac", "scale": f"{scale}x", "size": f"{points}x{points}"})
 
         logo_images = []

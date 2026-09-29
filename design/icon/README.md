@@ -17,7 +17,8 @@ python3 scripts/make_icons.py
 
 The script composes the layers into a square icon for iOS and iPadOS (the system applies
 the rounded mask), a rounded icon on the macOS 11–15 grid for macOS, the in-app logo, and
-the extension icons. Rendering uses AppKit (`scripts/render_svg.swift`), so it needs
+the extension icons. The macOS 16 and 32 pt sizes leave out the monogram, which is
+illegible there (Finder list view, Spotlight, menus); from 128 pt it is kept. Rendering uses AppKit (`scripts/render_svg.swift`), so it needs
 macOS with Xcode and no other tool.
 
 ## Design rules (Apple Human Interface Guidelines, App icons)
