@@ -25,19 +25,21 @@ which encodes exactly this mapping:
 
 | Engine | Status | URL observed (extension disabled) | Signature |
 |---|---|---|---|
-| Google | verified | redirect works | `client=safari` |
+| Google | captured 2026-09-29 | `https://www.google.com/search?q=hello+world&ie=UTF-8&oe=UTF-8&hl=fr-fr&client=safari` | `client=safari` |
 | Yahoo | captured 2026-09-29 | `https://fr.search.yahoo.com/search?p=hello+world&fr=iphone&.tsrc=apple` | `fr=iphone` |
 | Ecosia | captured 2026-09-29 | `https://www.ecosia.org/search?q=hello+world&tts=st_asaf_iphone` | `tts=st_asaf_iphone` |
-| Bing | intercepted, parameter not captured | — | one of `form=APIPA1` / `form=APIPH1` |
-| DuckDuckGo | intercepted, parameter not captured | — | `t=iphone` |
+| Bing | captured 2026-09-29 | `https://www.bing.com/search?q=hello+world&form=APIPH1&PC=APPL` | `form=APIPH1` |
+| DuckDuckGo | captured 2026-09-29 | `https://duckduckgo.com/?q=hello+world&t=iphone&ia=web` | `t=iphone` |
 
 The first guesses for Yahoo (`fr=aapl`) and Ecosia (`tts=st_asaf_ios`) were wrong; only
 the signature differed, host, path and query parameter matched.
 
 ## iPad — untested
 
-Values may differ from the iPhone ones (e.g. `fr=ipad`, `tts=st_asaf_ipad`); capture them
-with the procedure below before relying on them.
+Values may differ from the iPhone ones. The catalog carries two unverified guesses
+(`form=APIPA1` for Bing, `t=ipad` for DuckDuckGo); Google (`client=safari`) is likely
+shared. Capture Yahoo and Ecosia (e.g. `fr=ipad`, `tts=st_asaf_ipad`?) with the procedure
+below before relying on them.
 
 ## Former iOS placeholder table (superseded)
 

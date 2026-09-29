@@ -80,6 +80,12 @@ test("iPhone address-bar URLs captured on device are intercepted", () => {
     "https://www.ecosia.org/search?q=hello+world&tts=st_asaf_iphone"), "hello+world");
   assert.equal(capture(INTERCEPTED_ENGINES.yahoo, true,
     "https://fr.search.yahoo.com/search?p=hello+world&fr=iphone&.tsrc=apple"), "hello+world");
+  assert.equal(capture(INTERCEPTED_ENGINES.duckduckgo, true,
+    "https://duckduckgo.com/?q=hello+world&t=iphone&ia=web"), "hello+world");
+  assert.equal(capture(INTERCEPTED_ENGINES.bing, true,
+    "https://www.bing.com/search?q=hello+world&form=APIPH1&PC=APPL"), "hello+world");
+  assert.equal(capture(INTERCEPTED_ENGINES.google, true,
+    "https://www.google.com/search?q=hello+world&ie=UTF-8&oe=UTF-8&hl=fr-fr&client=safari"), "hello+world");
 });
 
 test("macOS address-bar signatures are still intercepted", () => {
