@@ -19,3 +19,6 @@ Config/Local.xcconfig
 
 # Local coding-agent state (history, cache)
 .swival/
+
+# CodeGraph index (local SQLite database and daemon files)
+.codegraph/
