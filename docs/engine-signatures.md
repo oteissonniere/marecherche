@@ -5,6 +5,10 @@ extension leave alone a search typed on the engine's own page (`onlyAddressBar`)
 
 ## macOS — confirmed
 
+Verified end to end by Olivier on macOS (2026-09-29): with each of the five engines set as
+Safari's default, an address-bar search is redirected to the private instance, and to the
+public fallback when the instance is unreachable.
+
 Source: `preconfigured-search-engines.json` shipped inside *Qwant for Safari* 3.1.1
 (`/Applications/Qwant for Safari.app/Contents/PlugIns/Qwant for Safari Extension.appex/Contents/Resources/`),
 which encodes exactly this mapping:
