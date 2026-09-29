@@ -32,7 +32,8 @@ which encodes exactly this mapping:
 | DuckDuckGo | captured 2026-09-29 | `https://duckduckgo.com/?q=hello+world&t=iphone&ia=web` | `t=iphone` |
 
 The first guesses for Yahoo (`fr=aapl`) and Ecosia (`tts=st_asaf_ios`) were wrong; only
-the signature differed, host, path and query parameter matched.
+the signature differed, host, path and query parameter matched. After the fix, Olivier
+verified on iPhone that address-bar searches with all five engines are redirected.
 
 ## iPad — untested
 
