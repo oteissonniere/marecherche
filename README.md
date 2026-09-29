@@ -1,3 +1,5 @@
+<p align="center"><img src="design/icon/app-icon.svg" width="128" height="128" alt="Ma recherche icon"></p>
+
 # Ma recherche
 
 **Use the search engine you choose in Safari — including a private one running at home —
