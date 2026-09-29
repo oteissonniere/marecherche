@@ -9,12 +9,14 @@ in any browser without rebuilding the Safari extension.
 Query parameters: lang=en|fr, target=private|public, reachable=1|0|null.
 Storage lives in the page's memory; nothing here ships in the extension.
 """
+import os
 import sys
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 SRC = Path(__file__).resolve().parent.parent / "webext" / "src"
+BASE_DIR = os.path.realpath(SRC)
 
 STUB = r"""
 <script>
@@ -78,15 +80,17 @@ class Handler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=str(SRC), **kwargs)
 
     def do_GET(self):
-        # Resolve the decoded request path and refuse anything outside webext/src before
-        # touching the file system (no "..", encoded or not, can escape SRC).
+        # Normalise the decoded request path as text (normpath reads no file) and refuse
+        # anything outside webext/src before touching the file system: no "..", encoded
+        # or not, can escape the base directory.
         relative = unquote(urlsplit(self.path).path).lstrip("/")
-        path = (SRC / relative).resolve()
-        if not path.is_relative_to(SRC):
+        full_path = os.path.normpath(os.path.join(BASE_DIR, relative))
+        if not full_path.startswith(BASE_DIR + os.sep):
             self.send_error(404)
             return
-        if path.suffix == ".html" and path.is_file():
-            body = path.read_text(encoding="utf-8").replace("<head>", "<head>" + STUB, 1).encode()
+        if full_path.endswith(".html") and os.path.isfile(full_path):
+            with open(full_path, encoding="utf-8") as page:
+                body = page.read().replace("<head>", "<head>" + STUB, 1).encode()
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.send_header("Content-Length", str(len(body)))
