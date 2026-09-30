@@ -1,6 +1,6 @@
 {
   "extension_name": { "message": "Ma recherche" },
-  "extension_description": { "message": "Sends Safari address-bar searches to your private SearXNG instance, and to a public engine of your choice when it is unreachable." },
+  "extension_description": { "message": "Sends Safari address-bar searches to your private SearXNG instance, or a public engine when it is unreachable." },
 
   "popup_status_private": { "message": "Private instance" },
   "popup_status_public": { "message": "Public engine: $ENGINE$", "placeholders": { "engine": { "content": "$1" } } },

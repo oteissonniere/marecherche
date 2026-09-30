@@ -21,6 +21,14 @@ test("en and fr define exactly the same keys", () => {
   assert.deepEqual(Object.keys(fr).sort(), Object.keys(en).sort());
 });
 
+// App Store Connect rejects the upload otherwise ("Invalid messages file").
+test("the extension description is at most 112 characters", () => {
+  for (const [code, messages] of [["en", en], ["fr", fr]]) {
+    const { length } = messages.extension_description.message;
+    assert.ok(length <= 112, `${code}: ${length} characters`);
+  }
+});
+
 test("every message is a non-empty string", () => {
   for (const [code, messages] of [["en", en], ["fr", fr]]) {
     for (const [key, entry] of Object.entries(messages)) {

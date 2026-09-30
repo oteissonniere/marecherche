@@ -1,6 +1,6 @@
 {
   "extension_name": { "message": "Ma recherche" },
-  "extension_description": { "message": "Envoie les recherches de la barre d'adresse de Safari vers votre instance SearXNG privée, et vers un moteur public de votre choix lorsqu'elle est injoignable." },
+  "extension_description": { "message": "Envoie vos recherches Safari vers votre instance SearXNG privée, ou un moteur public si elle est injoignable." },
 
   "popup_status_private": { "message": "Instance privée" },
   "popup_status_public": { "message": "Moteur public : $ENGINE$", "placeholders": { "engine": { "content": "$1" } } },
