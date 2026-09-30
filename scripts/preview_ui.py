@@ -6,7 +6,8 @@ in any browser without rebuilding the Safari extension.
     open http://localhost:8765/popup/popup.html?lang=fr&target=public
     open http://localhost:8765/settings/settings.html?lang=en
 
-Query parameters: lang=en|fr, target=private|public, reachable=1|0|null.
+Query parameters: lang=en|fr, target=private|public, reachable=1|0|null,
+private=0 (no private instance configured, as after a fresh install).
 Storage lives in the page's memory; nothing here ships in the extension.
 """
 import os
@@ -27,7 +28,8 @@ STUB = r"""
   request.open("GET", `/_locales/${lang}/messages.json`, false);
   request.send();
   const messages = JSON.parse(request.responseText);
-  const store = {};
+  const store = params.get("private") === "0"
+    ? {} : { config: { privateEngine: { url: "http://192.168.1.10:8080" } } };
   const reachableParam = params.get("reachable");
   const state = {
     reachable: reachableParam === "null" ? null : reachableParam !== "0",

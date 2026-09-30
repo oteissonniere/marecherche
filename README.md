@@ -48,6 +48,7 @@ no VPN status and no location permission: what matters is whether your engine an
 - By default only address-bar searches are redirected; a search you type on google.com
   itself is left alone.
 - No telemetry. The only requests the extension makes are the probe and the redirect.
+  See the [privacy policy](PRIVACY.md).
 
 Search suggestions shown while you type still come from Safari's selected engine; an
 extension cannot replace them. You can turn them off in Safari's Search settings.
@@ -65,7 +66,8 @@ private instance reachable everywhere, and the fallback then only covers real ou
 1. Build and run the app (see below), then follow its on-screen steps to enable the
    extension in Safari and allow it on all websites.
 2. Open the extension popup → **Settings**, enter your instance URL
-   (e.g. `http://192.168.1.158:8092`) and pick the public fallback engine.
+   (e.g. `http://192.168.1.10:8080`) and pick the public fallback engine. Until an
+   instance URL is set, every search goes to the public engine and nothing is probed.
 3. The popup shows where searches currently go, lets you force a mode, and re-test.
 
 Safari syncs the extension itself across your devices (same bundle identifier on iOS,

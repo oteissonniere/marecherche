@@ -1,5 +1,6 @@
 import { browser } from "../lib/browser.js";
 import { PUBLIC_ENGINES, CUSTOM_ENGINE_ID } from "../lib/engines.js";
+import { isPrivateConfigured } from "../lib/config.js";
 import { t, localizeDocument } from "../lib/i18n.js";
 
 const led = document.getElementById("led");
@@ -8,6 +9,7 @@ const statusDetail = document.getElementById("status-detail");
 const errorText = document.getElementById("error");
 const testButton = document.getElementById("test");
 const modeInputs = [...document.querySelectorAll('input[name="mode"]')];
+const modes = document.querySelector(".modes");
 
 let config = null;
 
@@ -32,7 +34,13 @@ function render(state) {
     ? t("popup_status_private")
     : t("popup_status_public", [publicEngineName()]);
 
-  if (state.reachable === null) {
+  // Without a private instance there is nothing to test and no mode to choose.
+  const configured = isPrivateConfigured(config);
+  testButton.disabled = !configured;
+  modes.disabled = !configured;
+  if (!configured) {
+    statusDetail.textContent = t("popup_private_not_configured");
+  } else if (state.reachable === null) {
     statusDetail.textContent = t("popup_status_unknown");
   } else {
     const reachability = t(state.reachable ? "popup_reachable_yes" : "popup_reachable_no");
@@ -67,7 +75,7 @@ async function withChecking(task) {
       if (status?.state) { config = status.config; render(status.state); }
     } catch { /* keep the error visible */ }
   } finally {
-    testButton.disabled = false;
+    testButton.disabled = !isPrivateConfigured(config);
     led.classList.remove("checking");
   }
 }

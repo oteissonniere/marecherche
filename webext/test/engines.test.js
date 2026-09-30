@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import {
   INTERCEPTED_ENGINES, PUBLIC_ENGINES, publicTemplate, privateTemplate, publicInterceptedId
 } from "../src/lib/engines.js";
-import { normalizeConfig } from "../src/lib/config.js";
+import { configured } from "./fixtures.js";
 
 test("every intercepted engine has the expected shape", () => {
   for (const [key, engine] of Object.entries(INTERCEPTED_ENGINES)) {
@@ -27,17 +27,17 @@ test("every public engine url contains {q} exactly once and is https", () => {
 });
 
 test("publicTemplate resolves catalog and custom engines", () => {
-  assert.equal(publicTemplate(normalizeConfig({})), "https://www.qwant.com/?q={q}");
-  const custom = normalizeConfig({ publicEngineId: "custom", publicCustomUrl: "https://example.com/s?q={q}" });
+  assert.equal(publicTemplate(configured()), "https://www.qwant.com/?q={q}");
+  const custom = configured({ publicEngineId: "custom", publicCustomUrl: "https://example.com/s?q={q}" });
   assert.equal(publicTemplate(custom), "https://example.com/s?q={q}");
 });
 
 test("privateTemplate joins base url and search path", () => {
-  assert.equal(privateTemplate(normalizeConfig({})), "http://192.168.1.158:8092/search?q={q}");
+  assert.equal(privateTemplate(configured()), "http://192.168.1.10:8080/search?q={q}");
 });
 
 test("publicInterceptedId maps public engines to intercepted ones", () => {
-  assert.equal(publicInterceptedId(normalizeConfig({ publicEngineId: "google" })), "google");
-  assert.equal(publicInterceptedId(normalizeConfig({ publicEngineId: "qwant" })), null);
-  assert.equal(publicInterceptedId(normalizeConfig({ publicEngineId: "custom" })), null);
+  assert.equal(publicInterceptedId(configured({ publicEngineId: "google" })), "google");
+  assert.equal(publicInterceptedId(configured({ publicEngineId: "qwant" })), null);
+  assert.equal(publicInterceptedId(configured({ publicEngineId: "custom" })), null);
 });

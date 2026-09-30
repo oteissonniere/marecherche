@@ -11,6 +11,7 @@ const ERROR_TARGETS = {
   "privateEngine.url:invalid": ["private-url", "settings_error_invalid_url"],
   "privateEngine.url:protocol": ["private-url", "settings_error_invalid_url"],
   "privateEngine.url:no-query": ["private-url", "settings_error_invalid_url"],
+  "privateEngine.url:required": ["private-url", "settings_error_private_required"],
   "privateEngine.searchPath:invalid": ["search-path", "settings_error_search_path"],
   "privateEngine.probePath:invalid": ["probe-path", "settings_error_probe_path"],
   "publicCustomUrl:invalid": ["custom-url", "settings_error_custom_url_placeholder"],

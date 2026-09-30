@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   DEFAULT_CONFIG, DEFAULT_STATE, CONFIG_KEY, STATE_KEY,
-  normalizeConfig, validateConfig, loadConfig, saveConfig, loadState, saveState
+  normalizeConfig, validateConfig, isPrivateConfigured, loadConfig, saveConfig, loadState, saveState
 } from "../src/lib/config.js";
 
 // Minimal in-memory stand-in for browser.storage.local.
@@ -34,8 +34,16 @@ test("normalizeConfig never aliases the frozen defaults", () => {
   assert.equal(DEFAULT_CONFIG.interceptedEngineIds.length, 5);
 });
 
-test("defaults are valid", () => {
+test("defaults are valid and have no private engine", () => {
   assert.equal(validateConfig({}).ok, true);
+  assert.equal(isPrivateConfigured(normalizeConfig({})), false);
+  assert.equal(isPrivateConfigured(normalizeConfig({ privateEngine: { url: "http://h:1" } })), true);
+});
+
+test("forcing the private engine requires one", () => {
+  const result = validateConfig({ mode: "force-private" });
+  assert.deepEqual(result.errors, ["privateEngine.url:required"]);
+  assert.equal(validateConfig({ mode: "force-public" }).ok, true);
 });
 
 test("validateConfig rejects bad values", () => {

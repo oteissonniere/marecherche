@@ -1,5 +1,8 @@
+import { isPrivateConfigured } from "./config.js";
+
 // Pure. Returns "private" | "public".
 export function decideTarget(config, reachable) {
+  if (!isPrivateConfigured(config)) return "public";
   if (config.mode === "force-private") return "private";
   if (config.mode === "force-public") return "public";
   return reachable === true ? "private" : "public";

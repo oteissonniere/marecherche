@@ -86,7 +86,7 @@ This document is the single source of truth for the coding agent. Read Section 0
 
 | Term | Meaning |
 |---|---|
-| **Private engine** | The user's SearXNG instance, e.g. `http://192.168.1.158:8092`. |
+| **Private engine** | The user's SearXNG instance, e.g. `http://192.168.1.10:8080`. |
 | **Public engine** | A mainstream engine from the catalog (Section 7.4) used as fallback. |
 | **Intercepted engine** | One of Safari's built-in default engines whose search URLs we redirect. |
 | **Target** | The engine a search is redirected to *right now*: private or public. |
@@ -537,7 +537,7 @@ export const STATE_KEY = "runtimeState";
 export const DEFAULT_CONFIG = Object.freeze({
   schemaVersion: 1,
   privateEngine: {
-    url: "http://192.168.1.158:8092",   // base URL, no trailing slash
+    url: "",                              // base URL, no trailing slash; "" = not configured
     searchPath: "/search?q={q}",
     probePath: "/healthz"                 // SearXNG liveness endpoint
   },
@@ -556,7 +556,12 @@ export const DEFAULT_STATE = Object.freeze({
   activeTarget: "public" // "private" | "public" — what the DNR rules currently point to
 });
 
+// Pure. False while the private URL is empty: the target is then always "public", nothing
+// is probed, the popup says so and disables "Test now" and the mode selector.
+export function isPrivateConfigured(config) { ... }
+
 // Pure. Returns { ok: true, config } or { ok: false, errors: [string] }.
+// An empty private URL is valid, except with mode "force-private" ("privateEngine.url:required").
 export function validateConfig(candidate) { ... }
 
 // Pure. Merges a stored (possibly partial / older) object onto DEFAULT_CONFIG.
@@ -739,7 +744,7 @@ export async function probe(config, fetchImpl = fetch) {
 ```
 
 `VERIFY V7.6`: from the background context on **iOS**, a `no-cors` HEAD to
-`http://192.168.1.158:8092/` resolves when on the home Wi-Fi and rejects quickly when
+`http://192.168.1.10:8080/` resolves when on the home Wi-Fi and rejects quickly when
 not (Safari may show a one-time "Local Network" prompt — acceptable). `FALLBACK`: if HEAD
 is rejected even when reachable, use `method: "GET"`. If the request never settles before
 timeout when reachable, apply the V7.2 fallback (host permission).
@@ -966,7 +971,7 @@ Mode:  ( ) Auto  ( ) Private  ( ) Public     <- radio group, immediate effect
 
 Form fields (in this order):
 
-1. Private instance URL (text, placeholder `http://192.168.1.158:8092`) + help text.
+1. Private instance URL (text, placeholder `http://192.168.1.10:8080`) + help text.
 2. Search path (text, default `/search?q={q}`) — advanced, collapsed by default.
 3. Probe path (text, default `/healthz`) — advanced, collapsed by default.
 4. Public engine (select: Qwant, DuckDuckGo, Brave, Startpage, Google, Bing, Ecosia, Custom).
@@ -1034,7 +1039,7 @@ Each test file imports only from `../src/lib/`. Minimum cases:
 - With onlyAddressBar=false: one rule, matches without signature.
 - Loop guard: target "public", publicEngineId "google" → no google rules; target
   "private" → google rules present.
-- `regexSubstitution` for private target equals `http://192.168.1.158:8092/search?q=\1`.
+- `regexSubstitution` for private target equals `http://192.168.1.10:8080/search?q=\1`.
 - Yahoo uses `p=` as query param; DuckDuckGo regex matches `https://duckduckgo.com/?q=a+b&t=osx` with group `a+b`.
 - No regex contains `(?=` or `(?<`.
 
@@ -1111,7 +1116,7 @@ Tasks:
 1. Create the repo skeleton: `project.yml`, `App/`, `Extension/`, `webext/src/` with
    a hard-coded `manifest.json` (Section 7.1) and a `background.js` that:
    - installs **one** dynamic DNR rule set: Google + `client=safari`, both orderings,
-     redirecting to `http://192.168.1.158:8092/search?q=\1`;
+     redirecting to `http://192.168.1.10:8080/search?q=\1`;
    - runs the probe on install and every alarm tick, logging the result;
    - registers `webNavigation.onBeforeNavigate` and `onErrorOccurred` listeners that
      only `console.log(details.url)`.

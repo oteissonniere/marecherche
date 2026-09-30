@@ -6,7 +6,7 @@ export const STATE_KEY = "runtimeState";
 export const DEFAULT_CONFIG = Object.freeze({
   schemaVersion: 1,
   privateEngine: Object.freeze({
-    url: "http://192.168.1.158:8092", // base URL, no trailing slash
+    url: "", // base URL, no trailing slash; "" = not configured yet (public engine only)
     searchPath: "/search?q={q}",
     probePath: "/healthz" // SearXNG liveness endpoint
   }),
@@ -63,6 +63,12 @@ export function normalizeConfig(stored) {
   return config;
 }
 
+// Pure. False until the user enters a private engine URL: until then the extension sends
+// every search to the public engine and never probes anything.
+export function isPrivateConfigured(config) {
+  return config.privateEngine.url !== "";
+}
+
 // Pure. Returns { ok: true, config } or { ok: false, errors: [string] }.
 // Error strings are stable identifiers the UI maps to localized messages.
 export function validateConfig(candidate) {
@@ -70,10 +76,14 @@ export function validateConfig(candidate) {
   const errors = [];
 
   let privateUrl = null;
-  try {
-    privateUrl = new URL(config.privateEngine.url);
-  } catch {
-    errors.push("privateEngine.url:invalid");
+  if (config.privateEngine.url === "") {
+    if (config.mode === "force-private") errors.push("privateEngine.url:required");
+  } else {
+    try {
+      privateUrl = new URL(config.privateEngine.url);
+    } catch {
+      errors.push("privateEngine.url:invalid");
+    }
   }
   if (privateUrl) {
     if (privateUrl.protocol !== "http:" && privateUrl.protocol !== "https:") {

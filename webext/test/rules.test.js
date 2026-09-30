@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { allRuleIds, regexFiltersFor, buildRules } from "../src/lib/rules.js";
 import { INTERCEPTED_ENGINES, PUBLIC_ENGINES } from "../src/lib/engines.js";
-import { normalizeConfig } from "../src/lib/config.js";
+import { configured } from "./fixtures.js";
 
 // First capture among the engine's filters, or null when none matches.
 function capture(engine, onlyAddressBar, url) {
@@ -23,7 +23,7 @@ test("allRuleIds covers every id buildRules can emit", () => {
   for (const onlyAddressBar of [true, false]) {
     for (const target of ["private", "public"]) {
       for (const publicEngineId of Object.keys(PUBLIC_ENGINES)) {
-        const config = normalizeConfig({ onlyAddressBar, publicEngineId });
+        const config = configured({ onlyAddressBar, publicEngineId });
         for (const rule of buildRules(config, target)) assert.ok(known.has(rule.id), `id ${rule.id}`);
       }
     }
@@ -31,7 +31,7 @@ test("allRuleIds covers every id buildRules can emit", () => {
 });
 
 test("rule ids are unique within a rule set", () => {
-  const rules = buildRules(normalizeConfig({}), "private");
+  const rules = buildRules(configured(), "private");
   assert.equal(new Set(rules.map((r) => r.id)).size, rules.length);
 });
 
@@ -128,22 +128,22 @@ test("macOS address-bar signatures are still intercepted", () => {
 });
 
 test("loop guard: public target never redirects an engine to itself", () => {
-  const config = normalizeConfig({ publicEngineId: "google" });
+  const config = configured({ publicEngineId: "google" });
   const googleIds = new Set(regexFiltersFor(INTERCEPTED_ENGINES.google, true).map((f) => f.id));
   assert.ok(!buildRules(config, "public").some((r) => googleIds.has(r.id)));
   assert.ok(buildRules(config, "private").some((r) => googleIds.has(r.id)));
 });
 
 test("regexSubstitution points at the decided target", () => {
-  const config = normalizeConfig({});
+  const config = configured();
   assert.equal(buildRules(config, "private")[0].action.redirect.regexSubstitution,
-    "http://192.168.1.158:8092/search?q=\\1");
+    "http://192.168.1.10:8080/search?q=\\1");
   assert.equal(buildRules(config, "public")[0].action.redirect.regexSubstitution,
     "https://www.qwant.com/?q=\\1");
 });
 
 test("rules only target top-level navigations", () => {
-  for (const rule of buildRules(normalizeConfig({}), "private")) {
+  for (const rule of buildRules(configured(), "private")) {
     assert.deepEqual(rule.condition.resourceTypes, ["main_frame"]);
     assert.equal(rule.action.type, "redirect");
   }
@@ -161,7 +161,7 @@ test("no regex uses alternation or lookaround (rejected by Safari)", () => {
 });
 
 test("only intercepted engines from the config produce rules", () => {
-  const config = normalizeConfig({ interceptedEngineIds: ["bing"] });
+  const config = configured({ interceptedEngineIds: ["bing"] });
   const bingIds = new Set(regexFiltersFor(INTERCEPTED_ENGINES.bing, true).map((f) => f.id));
   const rules = buildRules(config, "private");
   assert.ok(rules.length > 0 && rules.every((r) => bingIds.has(r.id)));

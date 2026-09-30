@@ -1,9 +1,10 @@
-import { test } from "node:test";
+import { test, afterEach } from "node:test";
 import assert from "node:assert/strict";
 import { createController, ALARM_NAME } from "../src/lib/controller.js";
 import { CONFIG_KEY, STATE_KEY, normalizeConfig } from "../src/lib/config.js";
+import { configured } from "./fixtures.js";
 
-const PRIVATE_SEARCH = "http://192.168.1.158:8092/search?q=chat";
+const PRIVATE_SEARCH = "http://192.168.1.10:8080/search?q=chat";
 const QWANT_SEARCH = "https://www.qwant.com/?q=chat";
 const GOOGLE_ADDRESS_BAR = "https://www.google.com/search?q=chat&client=safari";
 const silent = { log() {}, warn() {}, error() {} };
@@ -11,7 +12,7 @@ const silent = { log() {}, warn() {}, error() {} };
 // In-memory WebExtension API that records what the controller does.
 function fakeBrowser({ config = {}, state = {} } = {}) {
   const data = {
-    [CONFIG_KEY]: normalizeConfig(config),
+    [CONFIG_KEY]: configured(config),
     [STATE_KEY]: { reachable: null, checkedAt: 0, activeTarget: "private", ...state }
   };
   const listeners = {};
@@ -43,17 +44,31 @@ function fakeBrowser({ config = {}, state = {} } = {}) {
 }
 
 // fetch stand-in answering each probe in turn (true = the instance answers). A probe
-// beyond the scripted ones fails the test, so the number of probes is checked too.
+// beyond the scripted ones fails the test, so the number of probes is checked too. probe()
+// swallows fetch errors, so unexpected probes are recorded and checked after each test.
+const stubs = [];
 function probes(...outcomes) {
   const remaining = [...outcomes];
+  const unexpected = [];
   const fetchImpl = async (url) => {
-    if (remaining.length === 0) throw new assert.AssertionError({ message: `unexpected probe of ${url}` });
+    if (remaining.length === 0) {
+      unexpected.push(url);
+      throw new TypeError("unexpected probe");
+    }
     if (!remaining.shift()) throw new TypeError("network error");
     return {};
   };
   fetchImpl.remaining = () => remaining.length;
+  fetchImpl.unexpected = unexpected;
+  stubs.push(fetchImpl);
   return fetchImpl;
 }
+
+afterEach(() => {
+  const unexpected = stubs.flatMap((stub) => stub.unexpected);
+  stubs.length = 0;
+  assert.deepEqual(unexpected, [], "unexpected probes");
+});
 
 function setup({ config, state, fetchImpl = probes() } = {}) {
   const browser = fakeBrowser({ config, state });
@@ -66,7 +81,7 @@ function rulesTarget(browser) {
   const last = browser.calls.rules.at(-1);
   if (!last) return null;
   const substitution = last.addRules[0]?.action.redirect.regexSubstitution ?? "";
-  return substitution.startsWith("http://192.168.1.158:8092/") ? "private" : "public";
+  return substitution.startsWith("http://192.168.1.10:8080/") ? "private" : "public";
 }
 
 const navigation = (url, extra = {}) => ({ frameId: 0, tabId: 7, url, ...extra });
@@ -192,6 +207,33 @@ test("install arms the alarm and applies the rules even when the target is uncha
   await controller.onInstalled();
   assert.deepEqual(browser.calls.alarms, [["create", ALARM_NAME, { periodInMinutes: 1 }]]);
   assert.equal(rulesTarget(browser), "private");
+});
+
+// Fresh install from the store: no private engine until the user enters one.
+
+const UNCONFIGURED = { privateEngine: { url: "" } };
+
+test("without a private engine, install applies public rules and never probes", async () => {
+  const { browser, controller } = setup({ config: UNCONFIGURED, state: { activeTarget: "public" } });
+  await controller.onInstalled();
+  assert.equal(rulesTarget(browser), "public");
+  assert.equal(browser.data[STATE_KEY].reachable, null);
+});
+
+test("without a private engine, public searches never trigger an upgrade probe", async () => {
+  const { browser, controller } = setup({ config: UNCONFIGURED, state: { activeTarget: "public" } });
+  await controller.onBeforeNavigate(navigation(QWANT_SEARCH));
+  await controller.onBeforeNavigate(navigation(GOOGLE_ADDRESS_BAR));
+  await controller.onErrorOccurred(navigation(QWANT_SEARCH, { error: "offline" }));
+  await controller.handleMessage({ type: "probeNow" });
+  assert.deepEqual(browser.calls.tabs, []);
+});
+
+test("without a private engine, forcing it is refused", async () => {
+  const { browser, controller } = setup({ config: UNCONFIGURED });
+  const response = await controller.handleMessage({ type: "setMode", mode: "force-private" });
+  assert.equal(response.error, "privateEngine.url:required");
+  assert.equal(browser.data[CONFIG_KEY].mode, "auto");
 });
 
 test("a configuration change re-arms the alarm and re-applies the rules", async () => {

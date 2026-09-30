@@ -1,4 +1,4 @@
-import { CONFIG_KEY, loadConfig, saveConfig, loadState, saveState, validateConfig } from "./config.js";
+import { CONFIG_KEY, isPrivateConfigured, loadConfig, saveConfig, loadState, saveState, validateConfig } from "./config.js";
 import { buildRules, allRuleIds } from "./rules.js";
 import { probe } from "./probe.js";
 import { decideTarget, needsConfirmation, confirmationTimeout } from "./decision.js";
@@ -36,13 +36,17 @@ export function createController({ browser, fetchImpl = globalThis.fetch, now = 
   async function refresh(reason, { forceApply = false } = {}) {
     const config = await loadConfig(storage);
     const { activeTarget } = await loadState(storage);
-    let reachable = await probe(config, fetchImpl);
-    if (needsConfirmation(config, activeTarget, reachable)) {
-      reachable = await probe(config, fetchImpl, confirmationTimeout(config));
-      if (reachable) log.log(`[marecherche] refresh(${reason}) transient probe failure ignored`);
+    // Nothing to probe until a private engine is configured: reachability stays unknown.
+    let reachable = null;
+    if (isPrivateConfigured(config)) {
+      reachable = await probe(config, fetchImpl);
+      if (needsConfirmation(config, activeTarget, reachable)) {
+        reachable = await probe(config, fetchImpl, confirmationTimeout(config));
+        if (reachable) log.log(`[marecherche] refresh(${reason}) transient probe failure ignored`);
+      }
     }
     const target = decideTarget(config, reachable);
-    const previous = await saveState(storage, { reachable, checkedAt: now() });
+    const previous = await saveState(storage, { reachable, checkedAt: reachable === null ? 0 : now() });
     if (forceApply || previous.activeTarget !== target) await applyRules(config, target);
     log.log(`[marecherche] refresh(${reason}) reachable=${reachable} target=${target}`);
     return loadState(storage);
@@ -75,7 +79,7 @@ export function createController({ browser, fetchImpl = globalThis.fetch, now = 
   // On iOS the background is suspended and alarms are unreliable, so the search itself is
   // the only dependable signal that the network may have changed (e.g. back on home Wi-Fi).
   async function tryUpgradeToPrivate(config, tabId, encodedQuery, timeoutMs, reason) {
-    if (config.mode !== "auto") return;
+    if (config.mode !== "auto" || !isPrivateConfigured(config)) return;
     const { activeTarget } = await loadState(storage);
     if (activeTarget !== "public") return;
     const reachable = await probe(config, fetchImpl, timeoutMs);

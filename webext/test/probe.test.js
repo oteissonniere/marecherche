@@ -1,15 +1,15 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { probe } from "../src/lib/probe.js";
-import { normalizeConfig } from "../src/lib/config.js";
+import { configured } from "./fixtures.js";
 
-const config = normalizeConfig({ probeTimeoutMs: 200 });
+const config = configured({ probeTimeoutMs: 200 });
 
 test("a resolved fetch means reachable, with a no-cors GET on the probe url", async () => {
   let seen;
   const reachable = await probe(config, async (url, init) => { seen = { url, init }; return {}; });
   assert.equal(reachable, true);
-  assert.equal(seen.url, "http://192.168.1.158:8092/healthz");
+  assert.equal(seen.url, "http://192.168.1.10:8080/healthz");
   assert.equal(seen.init.method, "GET");
   assert.equal(seen.init.mode, "no-cors");
   assert.equal(seen.init.credentials, "omit");

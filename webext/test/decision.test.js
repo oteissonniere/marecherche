@@ -1,16 +1,23 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { decideTarget, isFresh, needsConfirmation, confirmationTimeout } from "../src/lib/decision.js";
+import { normalizeConfig } from "../src/lib/config.js";
+import { configured } from "./fixtures.js";
 
 test("auto follows reachability", () => {
-  assert.equal(decideTarget({ mode: "auto" }, true), "private");
-  assert.equal(decideTarget({ mode: "auto" }, false), "public");
-  assert.equal(decideTarget({ mode: "auto" }, null), "public");
+  assert.equal(decideTarget(configured({ mode: "auto" }), true), "private");
+  assert.equal(decideTarget(configured({ mode: "auto" }), false), "public");
+  assert.equal(decideTarget(configured({ mode: "auto" }), null), "public");
 });
 
 test("forced modes override reachability", () => {
-  assert.equal(decideTarget({ mode: "force-private" }, false), "private");
-  assert.equal(decideTarget({ mode: "force-public" }, true), "public");
+  assert.equal(decideTarget(configured({ mode: "force-private" }), false), "private");
+  assert.equal(decideTarget(configured({ mode: "force-public" }), true), "public");
+});
+
+test("without a private engine the target is always public", () => {
+  assert.equal(decideTarget(normalizeConfig({}), true), "public");
+  assert.equal(decideTarget(normalizeConfig({ mode: "force-private" }), true), "public");
 });
 
 test("only a failure while on the private target needs confirmation (hysteresis)", () => {
