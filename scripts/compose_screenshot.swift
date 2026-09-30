@@ -50,10 +50,14 @@ let scale = min(availableWidth / raw.size.width, availableHeight / raw.size.heig
 let shotSize = NSSize(width: raw.size.width * scale, height: raw.size.height * scale)
 let shotRect = NSRect(x: (W - shotSize.width) / 2, y: H - band - shotSize.height,
                       width: shotSize.width, height: shotSize.height)
-let radius = short * 0.055
+// A macOS window capture (⌘⇧4, Space) is transparent around the window and already has
+// rounded corners and a shadow: draw it as is. Device captures are opaque rectangles.
+let isWindowCapture = raw.representations.contains { $0.hasAlpha }
+let radius = isWindowCapture ? 0 : short * 0.055
 let clip = NSBezierPath(roundedRect: shotRect, xRadius: radius, yRadius: radius)
 
 NSGraphicsContext.saveGraphicsState()
+if isWindowCapture { NSBezierPath(rect: .zero).addClip() }
 let shadow = NSShadow()
 shadow.shadowColor = NSColor(white: 0, alpha: 0.35)
 shadow.shadowBlurRadius = short * 0.03
