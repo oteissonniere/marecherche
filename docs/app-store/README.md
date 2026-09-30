@@ -20,11 +20,12 @@ macOS): both apps use the bundle identifier `eu.teissonniere.marecherche`.
 
 1. **Apps → + → New App**. Platforms: iOS and macOS. Name: see below. Primary language:
    English (U.S.). Bundle ID: `eu.teissonniere.marecherche`. SKU: `marecherche`.
-   The bundle ID list only shows identifiers registered in the developer account. Xcode's
-   automatic signing registers them the first time the app runs on a device, and an
-   identifier covers every platform, so one registration serves iOS and macOS. If it is
-   missing, register it (and `eu.teissonniere.marecherche.Extension`) under
-   Certificates, Identifiers & Profiles → Identifiers, as an explicit App ID.
+   The bundle ID list only shows explicit App IDs registered in the developer account.
+   Development builds do not create them (Xcode signs them with its wildcard `*` App ID,
+   since the app uses no capability that needs an explicit one), so register both
+   `eu.teissonniere.marecherche` and `eu.teissonniere.marecherche.Extension` first under
+   Certificates, Identifiers & Profiles → Identifiers → + → App IDs → App, as explicit
+   App IDs. The description must contain only letters, digits and spaces.
 2. **App Information**
    - Category: Utilities (primary), Productivity (secondary).
    - Content rights: does not contain third-party content.
