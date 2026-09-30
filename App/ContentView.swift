@@ -5,6 +5,7 @@ import SafariServices
 
 private let extensionBundleIdentifier = "eu.teissonniere.marecherche.Extension"
 private let repositoryURL = URL(string: "https://github.com/oteissonniere/marecherche")!
+private let contactURL = URL(string: "mailto:marecherche@teissonniere.eu")!
 
 struct ContentView: View {
     #if os(iOS)
@@ -106,6 +107,8 @@ struct ContentView: View {
         HStack(spacing: 6) {
             Text("Open source — MIT")
             Link("GitHub", destination: repositoryURL)
+            Text("·")
+            Link("Contact", destination: contactURL)
         }
         .font(.footnote)
         .foregroundStyle(.secondary)

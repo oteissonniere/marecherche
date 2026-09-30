@@ -1,6 +1,7 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "%@": {},
     "%lld": {
       "shouldTranslate": false
     },
@@ -20,6 +21,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cliquez sur l’icône de l’extension dans la barre d’outils de Safari pour configurer votre instance privée."
+          }
+        }
+      }
+    },
+    "Contact": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contact"
           }
         }
       }
@@ -122,6 +133,9 @@
           }
         }
       }
+    },
+    "·": {
+      "shouldTranslate": false
     }
   },
   "version": "1.0"

@@ -176,17 +176,28 @@ one on <https://searx.space> and try it once in the extension).
 
 ## 5. Screenshots
 
-Required sizes (one set per platform, 1 to 10 images, English and optionally French):
+Required sizes (one set per platform, 1 to 10 images, English and French):
 
-| Platform | Size (portrait) |
-|---|---|
-| iPhone 6.9" | 1320 × 2868 |
-| iPad 13" | 2064 × 2752 |
-| Mac | 2880 × 1800 (16:10) |
+| Platform | Size | Device used |
+|---|---|---|
+| iPhone 6.9" | 1320 × 2868 | iPhone 18 Pro Max simulator (native size) |
+| iPad 13" | 2064 × 2752 | iPad Pro 13-inch (M5) simulator (native size) |
+| Mac | 2880 × 1800 (16:10) | any Mac window capture, scaled |
 
-Suggested set: the extension popup in Safari (private instance reachable), a search
-landing on SearXNG from the address bar, the popup on the fallback engine away from
-home, the settings page, the app's setup steps.
+Five scenes per set, in this order: the popup on the private instance, the popup on the
+fallback engine (instance made unreachable by changing its port in the settings), the
+SearXNG results, the settings page, the app's setup screen.
+
+The images are not committed (about 25 MB): they live in `docs/app-store/screenshots/`,
+which git ignores.
+
+- Raw captures go in `docs/app-store/screenshots/raw/`, named
+  `<iphone|ipad|mac>-<en|fr>-<popup-private|popup-public|results|settings|app>.png`.
+  On a simulator: `xcrun simctl io <device> screenshot <file>`, after
+  `xcrun simctl status_bar <device> override --time 9:41 ...`.
+- `./scripts/store_screenshots.sh` composes them (icon gradient, caption, rounded
+  screenshot, opaque PNG) into `docs/app-store/screenshots/<device>/<lang>-<n>.png`,
+  ready to upload. Captions are in the script.
 
 ## 6. Each release
 

@@ -5,7 +5,8 @@
 Please **do not open a public issue** for a security problem.
 
 Report it privately through GitHub:
-[Security → Report a vulnerability](https://github.com/oteissonniere/marecherche/security/advisories/new).
+[Security → Report a vulnerability](https://github.com/oteissonniere/marecherche/security/advisories/new),
+or by email to <marecherche@teissonniere.eu>.
 
 Include what you found, the steps to reproduce it, and the platform and version
 (macOS, iOS or iPadOS; Safari version). You will get an answer as soon as possible;

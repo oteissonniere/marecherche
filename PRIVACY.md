@@ -44,5 +44,5 @@ your browsing history.
 
 ## Contact
 
-Questions or concerns: open an issue at
+Questions or concerns: email <marecherche@teissonniere.eu>, or open an issue at
 <https://github.com/oteissonniere/marecherche/issues>.
