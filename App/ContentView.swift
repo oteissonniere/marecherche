@@ -84,7 +84,9 @@ struct ContentView: View {
             SFSafariApplication.showPreferencesForExtension(withIdentifier: extensionBundleIdentifier) { error in
                 // Surface the failure instead of silently doing nothing (e.g. extension not
                 // yet registered by Safari, or a bundle identifier mismatch).
-                settingsError = error.map { "Safari could not open the extension settings: \($0.localizedDescription)" }
+                settingsError = error.map {
+                    String(localized: "Safari could not open the extension settings: \($0.localizedDescription)")
+                }
             }
         }
         .buttonStyle(.borderedProminent)

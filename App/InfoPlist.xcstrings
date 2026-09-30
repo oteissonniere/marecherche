@@ -1,0 +1,19 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "CFBundleDisplayName": {
+      "shouldTranslate": false
+    },
+    "NSLocalNetworkUsageDescription": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ma recherche vérifie si votre instance de recherche privée sur le réseau local est joignable."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

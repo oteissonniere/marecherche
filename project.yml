@@ -80,6 +80,8 @@ targets:
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         NSLocalNetworkUsageDescription: Ma recherche checks whether your private search instance on the local network is reachable.
+        # Only HTTPS through the system (exempt): skips the export compliance question on upload.
+        ITSAppUsesNonExemptEncryption: false
         UILaunchScreen: {}
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
@@ -114,6 +116,8 @@ targets:
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         NSLocalNetworkUsageDescription: Ma recherche checks whether your private search instance on the local network is reachable.
+        # Only HTTPS through the system (exempt): skips the export compliance question on upload.
+        ITSAppUsesNonExemptEncryption: false
         LSApplicationCategoryType: public.app-category.utilities
     entitlements:
       path: App/MaRecherche-macOS.entitlements

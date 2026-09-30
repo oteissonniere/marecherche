@@ -1,0 +1,128 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "%lld": {
+      "shouldTranslate": false
+    },
+    "Choose “Always Allow on Every Website” so search engines can be redirected.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez « Toujours autoriser sur tous les sites web » pour que les moteurs de recherche puissent être redirigés."
+          }
+        }
+      }
+    },
+    "Click the extension icon in Safari's toolbar to set your private instance.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cliquez sur l’icône de l’extension dans la barre d’outils de Safari pour configurer votre instance privée."
+          }
+        }
+      }
+    },
+    "Enable “Ma recherche”.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activez « Ma recherche »."
+          }
+        }
+      }
+    },
+    "GitHub": {
+      "shouldTranslate": false
+    },
+    "In Safari, tap the extension icon to set your private instance.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans Safari, touchez l’icône de l’extension pour configurer votre instance privée."
+          }
+        }
+      }
+    },
+    "Ma recherche": {
+      "shouldTranslate": false
+    },
+    "Open Safari Extensions Settings": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir les réglages des extensions de Safari"
+          }
+        }
+      }
+    },
+    "Open Safari settings, then the Extensions tab.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrez les réglages de Safari, puis l’onglet Extensions."
+          }
+        }
+      }
+    },
+    "Open Settings": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir Réglages"
+          }
+        }
+      }
+    },
+    "Open Settings → Apps → Safari → Extensions.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrez Réglages → Apps → Safari → Extensions."
+          }
+        }
+      }
+    },
+    "Open source — MIT": {
+      "shouldTranslate": false
+    },
+    "Safari could not open the extension settings: %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Safari n’a pas pu ouvrir les réglages de l’extension : %@"
+          }
+        }
+      }
+    },
+    "Sends Safari address-bar searches to your private SearXNG instance, and to a public engine when it is unreachable.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoie les recherches de la barre d’adresse de Safari vers votre instance SearXNG privée, et vers un moteur public lorsqu’elle est injoignable."
+          }
+        }
+      }
+    },
+    "Set “All Websites” to Allow so search engines can be redirected.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglez « Tous les sites web » sur Autoriser pour que les moteurs de recherche puissent être redirigés."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
