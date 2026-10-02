@@ -8,10 +8,16 @@ cd "$(dirname "$0")/.."
 
 xcodegen generate
 
+# Build into a throwaway directory. An unsigned copy of the macOS app left on disk gets
+# registered by macOS next to the installed one (same bundle identifier); Safari may then
+# load the wrong copy and turn the extension off.
+DERIVED="$(mktemp -d)"
+trap 'rm -rf "$DERIVED"' EXIT
+
 xcodebuild -project MaRecherche.xcodeproj -scheme "MaRecherche (macOS)" \
   -configuration Debug -destination "generic/platform=macOS" \
-  CODE_SIGNING_ALLOWED=NO build
+  -derivedDataPath "$DERIVED" CODE_SIGNING_ALLOWED=NO build
 
 xcodebuild -project MaRecherche.xcodeproj -scheme "MaRecherche (iOS)" \
   -configuration Debug -destination "generic/platform=iOS Simulator" \
-  CODE_SIGNING_ALLOWED=NO build
+  -derivedDataPath "$DERIVED" CODE_SIGNING_ALLOWED=NO build
