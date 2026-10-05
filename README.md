@@ -27,8 +27,8 @@ Ma recherche **checks** whether your private engine answers and **switches** by 
 The check is a plain request to the engine itself. The extension needs no Wi-Fi name,
 no VPN status and no location permission: what matters is whether your engine answers.
 
-> Status: working on Mac and iPhone, built from source; iPad verified on the simulator;
-> not yet on the App Store.
+> Status: version 0.1.0 is in App Store review and in TestFlight testing. Working on Mac
+> and iPhone; iPad verified on the simulator.
 > See [docs/reports/M0.md](docs/reports/M0.md) for what has been verified on devices.
 
 ## How it works
