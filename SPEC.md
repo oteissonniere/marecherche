@@ -509,7 +509,7 @@ settings page click handler (must run inside a user gesture).
 
 ### 7.2 Localization
 
-`_locales/en/messages.json` and `_locales/fr/messages.json`. Keys (all must exist in both):
+`_locales/{en,fr,it,de,es,pt}/messages.json`. Keys (all must exist in every locale):
 
 ```
 extension_name, extension_description,

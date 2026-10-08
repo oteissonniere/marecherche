@@ -12,6 +12,30 @@
             "state": "translated",
             "value": "Choisissez « Toujours autoriser sur tous les sites web » pour que les moteurs de recherche puissent être redirigés."
           }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli « Consenti sempre su tutti i siti web » in modo che i motori di ricerca possano essere reindirizzati."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle « Immer auf jeder Website zulassen », damit die Suchmaschinen umgeleitet werden können."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige « Permitir siempre en todos los sitios web » para que los motores de búsqueda puedan redirigirse."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha « Permitir sempre em todos os websites » para que os motores de pesquisa possam ser redirecionados."
+          }
         }
       }
     },
@@ -21,6 +45,30 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cliquez sur l’icône de l’extension dans la barre d’outils de Safari pour configurer votre instance privée."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clicca sull'icona dell'estensione nella barra degli strumenti di Safari per configurare la tua istanza privata."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klicke auf das Symbol der Erweiterung in der Safari-Leiste, um deine private Instanz einzurichten."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca el icono de la extensión en la barra de herramientas de Safari para configurar tu instancia privada."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toque no ícone da extensão na barra de ferramentas do Safari para configurar a sua instância privada."
           }
         }
       }
@@ -32,6 +80,30 @@
             "state": "translated",
             "value": "Contact"
           }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contatti"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontakt"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contacto"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contacto"
+          }
         }
       }
     },
@@ -41,6 +113,30 @@
           "stringUnit": {
             "state": "translated",
             "value": "Activez « Ma recherche »."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva « Ma recherche »."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktiviere « Ma recherche »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activa « Ma recherche »."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ative « Ma recherche »."
           }
         }
       }
@@ -55,6 +151,30 @@
             "state": "translated",
             "value": "Dans Safari, touchez l’icône de l’extension pour configurer votre instance privée."
           }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Safari, tocca l'icona dell'estensione per configurare la tua istanza privata."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe in Safari auf das Symbol der Erweiterung, um deine private Instanz einzurichten."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En Safari, toca el icono de la extensión para configurar tu instancia privada."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Safari, toque no ícone da extensão para configurar a sua instância privada."
+          }
         }
       }
     },
@@ -68,6 +188,30 @@
             "state": "translated",
             "value": "Ouvrir les réglages des extensions de Safari"
           }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri le impostazioni delle estensioni di Safari"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Safari-Erweiterungseinstellungen öffnen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir los ajustes de las extensiones de Safari"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir as definições das extensões do Safari"
+          }
         }
       }
     },
@@ -77,6 +221,30 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ouvrez les réglages de Safari, puis l’onglet Extensions."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri le impostazioni di Safari, quindi la scheda Estensioni."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öffne die Einstellungen von Safari und dann den Bereich Erweiterungen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre los ajustes de Safari y luego la pestaña Extensiones."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abra as definições do Safari e depois a separação Extensões."
           }
         }
       }
@@ -88,6 +256,30 @@
             "state": "translated",
             "value": "Ouvrir Réglages"
           }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri Impostazioni"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einstellungen öffnen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir Ajustes"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir Definições"
+          }
         }
       }
     },
@@ -97,6 +289,30 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ouvrez Réglages → Apps → Safari → Extensions."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri Impostazioni → App → Safari → Estensioni."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öffne Einstellungen → Apps → Safari → Erweiterungen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre Ajustes → Apps → Safari → Extensiones."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abra Definições → Apps → Safari → Extensões."
           }
         }
       }
@@ -111,6 +327,30 @@
             "state": "translated",
             "value": "Safari n’a pas pu ouvrir les réglages de l’extension : %@"
           }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Safari non è riuscito ad aprire le impostazioni dell'estensione: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Safari konnte die Erweiterungseinstellungen nicht öffnen: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Safari no ha podido abrir los ajustes de la extensión: %@"
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Safari não conseguiu abrir as definições da extensão: %@"
+          }
         }
       }
     },
@@ -121,6 +361,30 @@
             "state": "translated",
             "value": "Envoie les recherches de la barre d’adresse de Safari vers votre instance SearXNG privée, et vers un moteur public lorsqu’elle est injoignable."
           }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invia le ricerche della barra degli indirizzi di Safari alla tua istanza SearXNG privata, e a un motore pubblico quando non è raggiungibile."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leitet Adressleisten-Suchen in Safari an deine private SearXNG-Instanz weiter, und an eine öffentliche Engine, wenn sie nicht erreichbar ist."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envía las búsquedas de la barra de direcciones de Safari a tu instancia privada de SearXNG, y a un motor público cuando no está accesible."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envia as pesquisas da barra de endereços do Safari para a sua instância privada SearXNG, e para um motor público quando ela não está acessível."
+          }
         }
       }
     },
@@ -130,6 +394,30 @@
           "stringUnit": {
             "state": "translated",
             "value": "Réglez « Tous les sites web » sur Autoriser pour que les moteurs de recherche puissent être redirigés."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imposta « Tutti i siti web » su Consenti in modo che i motori di ricerca possano essere reindirizzati."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Setze « Alle Websites » auf Zulassen, damit die Suchmaschinen umgeleitet werden können."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pon « Todos los sitios web » en Permitir para que los motores de búsqueda puedan redirigirse."
+          }
+        },
+        "pt": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Defina « Todos os websites » como Permitir para que os motores de pesquisa possam ser redirecionados."
           }
         }
       }
