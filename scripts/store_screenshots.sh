@@ -33,12 +33,32 @@ caption() {
     en-results) echo "Straight from Safari's address bar" ;;
     en-settings) echo "Your instance, your fallback engine" ;;
     en-app) echo "Ready in four steps" ;;
+    de-popup-private) echo "Deine Suchen, auf deiner privaten Suchmaschine" ;;
+    de-popup-public) echo "Nicht erreichbar? Wechselt von selbst" ;;
+    de-results) echo "Direkt aus der Adressleiste von Safari" ;;
+    de-settings) echo "Deine Instanz, deine Ersatz-Suchmaschine" ;;
+    de-app) echo "In vier Schritten startklar" ;;
+    es-popup-private) echo "Tus búsquedas, en tu buscador privado" ;;
+    es-popup-public) echo "¿Fuera de alcance? Cambia solo" ;;
+    es-results) echo "Directamente desde la barra de direcciones" ;;
+    es-settings) echo "Tu instancia, tu buscador de respaldo" ;;
+    es-app) echo "Lista en cuatro pasos" ;;
+    it-popup-private) echo "Le tue ricerche, sul tuo motore privato" ;;
+    it-popup-public) echo "Non raggiungibile? Passa da solo" ;;
+    it-results) echo "Direttamente dalla barra degli indirizzi" ;;
+    it-settings) echo "La tua istanza, il tuo motore di riserva" ;;
+    it-app) echo "Pronta in quattro passaggi" ;;
+    pt-popup-private) echo "Suas buscas, no seu buscador privado" ;;
+    pt-popup-public) echo "Fora de alcance? Alterna sozinho" ;;
+    pt-results) echo "Direto da barra de endereço do Safari" ;;
+    pt-settings) echo "Sua instância, seu buscador reserva" ;;
+    pt-app) echo "Pronto em quatro passos" ;;
   esac
 }
 
 for device in iphone ipad mac; do
   read -r width height <<< "$(size "$device")"
-  for lang in en fr; do
+  for lang in en fr de es it pt; do
     n=0
     for scene in "${SCENES[@]}"; do
       raw="$SHOTS/raw/$device-$lang-$scene.png"
