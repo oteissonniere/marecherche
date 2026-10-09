@@ -8,7 +8,6 @@ options:
     macOS: "14.0"
   xcodeVersion: "16.0"
   generateEmptyDirectories: true
-  knownRegions: [Base, en, fr, it, de, es, pt]
 
 # Base.xcconfig optionally includes the git-ignored Local.xcconfig (DEVELOPMENT_TEAM), so a
 # fresh clone or CI builds without it. Referencing Local.xcconfig directly fails the build.
@@ -80,13 +79,6 @@ targets:
         CFBundleDisplayName: Ma recherche
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
-        CFBundleLocalizations:
-          - en
-          - fr
-          - it
-          - de
-          - es
-          - pt
         NSLocalNetworkUsageDescription: Ma recherche checks whether your private search instance on the local network is reachable.
         # Only HTTPS through the system (exempt): skips the export compliance question on upload.
         ITSAppUsesNonExemptEncryption: false
@@ -123,13 +115,6 @@ targets:
         CFBundleDisplayName: Ma recherche
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
-        CFBundleLocalizations:
-          - en
-          - fr
-          - it
-          - de
-          - es
-          - pt
         NSLocalNetworkUsageDescription: Ma recherche checks whether your private search instance on the local network is reachable.
         # Only HTTPS through the system (exempt): skips the export compliance question on upload.
         ITSAppUsesNonExemptEncryption: false

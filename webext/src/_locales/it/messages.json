@@ -1,6 +1,6 @@
 {
   "extension_name": { "message": "Ma recherche" },
-  "extension_description": { "message": "Invia le ricerche della barra degli indirizzi di Safari alla tua istanza SearXNG privata, o a un motore pubblico quando non è raggiungibile." },
+  "extension_description": { "message": "Invia le ricerche di Safari alla tua istanza SearXNG privata, o a un motore pubblico se non è raggiungibile." },
 
   "popup_status_private": { "message": "Istanza privata" },
   "popup_status_public": { "message": "Motore pubblico: $ENGINE$", "placeholders": { "engine": { "content": "$1" } } },
@@ -10,7 +10,7 @@
   "popup_reachable_no": { "message": "Istanza privata non raggiungibile" },
   "popup_private_not_configured": { "message": "Nessuna istanza privata configurata" },
   "popup_mode_label": { "message": "Modalità" },
-  "popup_mode_auto": { "message": "Automatica" },
+  "popup_mode_auto": { "message": "Auto" },
   "popup_mode_private": { "message": "Privata" },
   "popup_mode_public": { "message": "Pubblica" },
   "popup_test_button": { "message": "Testa ora" },
