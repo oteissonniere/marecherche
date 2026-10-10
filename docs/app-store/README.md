@@ -31,7 +31,8 @@ macOS): both apps use the bundle identifier `eu.teissonniere.marecherche`.
    - Content rights: does not contain third-party content.
    - Age rating: answer "None" / "No" everywhere. The app shows no web content itself:
      search results open in Safari.
-   - Add the French localization (App Information → language menu → French).
+   - Add the other localizations (App Information → language menu): French, German,
+     Spanish (Spain), Italian, Portuguese (Brazil).
 3. **Pricing and Availability**: free, all countries.
 4. **App Privacy**
    - Privacy policy URL: `https://github.com/oteissonniere/marecherche/blob/main/PRIVACY.md`
@@ -148,6 +149,166 @@ URLs (both languages):
 
 **Nouveautés** (première version) : `Première version.`
 
+The German, Spanish, Italian and Brazilian Portuguese texts below were written without a
+native review: have them proofread before the 1.0 listing. They use Safari's own terms
+("Suchmaschine", "buscador", "motore di ricerca").
+
+### German
+
+**Name**: `Ma recherche`
+
+**Untertitel**: `Private Suche mit Ersatz`
+
+**Werbetext**:
+
+> Sende Safari-Suchen an deine eigene SearXNG-Instanz zu Hause und an eine öffentliche Suchmaschine deiner Wahl, wenn sie nicht erreichbar ist. Wechselt von selbst.
+
+**Schlüsselwörter**: `searxng,suchmaschine,privat,datenschutz,selbst gehostet,homelab,umleitung,ersatz,metasuche,vpn`
+
+**Beschreibung**:
+
+> Nutze in Safari die Suchmaschine deiner Wahl – auch eine private, die bei dir zu Hause läuft – und verliere die Suche nie, wenn sie nicht erreichbar ist.
+>
+> Ma recherche sendet die Suchen aus der Adressleiste von Safari an die Suchmaschine deiner Wahl. Die App ist für eine selbst gehostete, private Suchmaschine gedacht, etwa eine SearXNG-Instanz in deinem Heimnetz, und ergänzt sie um eine öffentliche Ersatz-Suchmaschine: Qwant, DuckDuckGo, Brave, Startpage, Google, Bing, Ecosia oder eine Adresse deiner Wahl.
+>
+> PRÜFT UND WECHSELT VON SELBST
+> • Zu Hause oder über dein VPN gehen die Suchen an deine private Suchmaschine.
+> • Unterwegs gehen sie an deine Ersatz-Suchmaschine, ohne Fehlerseite und ohne etwas umzustellen.
+> • Wieder zu Hause geht schon die erste Suche wieder an deine private Suchmaschine.
+>
+> Die Prüfung ist eine einfache Anfrage an deine Suchmaschine. Kein WLAN-Name, kein VPN-Status, keine Standortfreigabe: Es zählt nur, ob deine Suchmaschine antwortet.
+>
+> PRIVAT VON GRUND AUF
+> • Die Umleitung geschieht in Safari, bevor die Anfrage dein Gerät verlässt: Die Standardsuchmaschine von Safari sieht deine Suche nie.
+> • Kein Konto, keine Statistiken, keine Werbung. Es wird nie etwas an den Entwickler gesendet.
+> • Open Source (MIT): Der Code liegt auf GitHub.
+>
+> FUNKTIONIERT MIT DEN SUCHMASCHINEN VON SAFARI
+> Google, Bing, Yahoo, DuckDuckGo und Ecosia, auf allen Länder-Domains. Nur Suchen aus der Adressleiste werden umgeleitet: Eine Suche auf der Seite einer Suchmaschine bleibt unverändert.
+>
+> Das Menü der Erweiterung zeigt, wohin deine Suchen gehen, lässt dich die private oder die öffentliche Suchmaschine erzwingen und prüft deine Instanz auf Wunsch erneut.
+>
+> Erfordert iOS 17, iPadOS 17 oder macOS 14 oder neuer.
+
+**Neuheiten (erste Version)**: `Erste Version.`
+
+### Spanish
+
+**Nombre**: `Ma recherche`
+
+**Subtítulo**: `Búsqueda privada con respaldo`
+
+**Texto promocional**:
+
+> Envía las búsquedas de Safari a tu propia instancia de SearXNG en casa, y al buscador público que elijas cuando no esté accesible. Cambia solo, en ambos sentidos.
+
+**Palabras clave**: `searxng,buscador,privado,privacidad,autoalojado,homelab,redirección,respaldo,metabuscador,vpn`
+
+**Descripción**:
+
+> Usa en Safari el buscador que tú elijas —incluido uno privado que funcione en tu casa— y no te quedes nunca sin búsqueda cuando no esté accesible.
+>
+> Ma recherche envía las búsquedas que escribes en la barra de direcciones de Safari al buscador que elijas. Está pensada para un buscador privado y autoalojado, como una instancia de SearXNG en tu red doméstica, con un buscador público de respaldo: Qwant, DuckDuckGo, Brave, Startpage, Google, Bing, Ecosia o la dirección que indiques.
+>
+> COMPRUEBA Y CAMBIA SOLA
+> • En casa o con tu VPN, las búsquedas van a tu buscador privado.
+> • Fuera de casa, van a tu buscador de respaldo, sin página de error y sin cambiar ningún ajuste.
+> • De vuelta en casa, la primera búsqueda ya vuelve a tu buscador privado.
+>
+> La comprobación es una simple petición a tu buscador. Ni nombre de la red Wi-Fi, ni estado de la VPN, ni permiso de localización: solo importa si tu buscador responde.
+>
+> PRIVADA POR DISEÑO
+> • La redirección se hace dentro de Safari, antes de que la petición salga de tu dispositivo: el buscador por omisión de Safari nunca ve tu búsqueda.
+> • Sin cuenta, sin estadísticas, sin publicidad. Nunca se envía nada al desarrollador.
+> • Código abierto (MIT): el código está en GitHub.
+>
+> FUNCIONA CON LOS BUSCADORES DE SAFARI
+> Google, Bing, Yahoo, DuckDuckGo y Ecosia, en cualquier dominio nacional. Solo se redirigen las búsquedas de la barra de direcciones: una búsqueda hecha en la página de un buscador no se modifica.
+>
+> El menú de la extensión muestra adónde van tus búsquedas, permite forzar el buscador privado o el público y vuelve a comprobar tu instancia cuando quieras.
+>
+> Requiere iOS 17, iPadOS 17 o macOS 14 o posterior.
+
+**Novedades (primera versión)**: `Primera versión.`
+
+### Italian
+
+**Nome**: `Ma recherche`
+
+**Sottotitolo**: `Ricerca privata con riserva`
+
+**Testo promozionale**:
+
+> Invia le ricerche di Safari alla tua istanza SearXNG di casa e al motore pubblico che preferisci quando non è raggiungibile. Passa da solo, in entrambi i sensi.
+
+**Parole chiave**: `searxng,motore di ricerca,privato,privacy,self-hosted,homelab,reindirizzamento,riserva,vpn`
+
+**Descrizione**:
+
+> Usa in Safari il motore di ricerca che preferisci, anche uno privato che gira a casa tua, senza mai restare senza ricerca quando non è raggiungibile.
+>
+> Ma recherche invia le ricerche digitate nella barra degli indirizzi di Safari al motore che scegli. È pensata per un motore privato e self-hosted, come un’istanza SearXNG nella tua rete di casa, affiancato da un motore pubblico di riserva: Qwant, DuckDuckGo, Brave, Startpage, Google, Bing, Ecosia o un indirizzo a tua scelta.
+>
+> VERIFICA E PASSA DA SOLA
+> • A casa o con la tua VPN, le ricerche vanno al tuo motore privato.
+> • Fuori casa, vanno al motore di riserva, senza pagina di errore e senza cambiare impostazioni.
+> • Tornando a casa, già la prima ricerca torna al tuo motore privato.
+>
+> La verifica è una semplice richiesta al tuo motore. Nessun nome di rete Wi-Fi, nessuno stato della VPN, nessun permesso di localizzazione: conta solo se il tuo motore risponde.
+>
+> PRIVATA PER COME È FATTA
+> • Il reindirizzamento avviene dentro Safari, prima che la richiesta lasci il dispositivo: il motore predefinito di Safari non vede mai la tua ricerca.
+> • Nessun account, nessuna statistica, nessuna pubblicità. Nulla viene mai inviato allo sviluppatore.
+> • Open source (MIT): il codice è su GitHub.
+>
+> FUNZIONA CON I MOTORI DI SAFARI
+> Google, Bing, Yahoo, DuckDuckGo ed Ecosia, su qualsiasi dominio nazionale. Vengono reindirizzate solo le ricerche della barra degli indirizzi: una ricerca fatta sulla pagina di un motore non viene toccata.
+>
+> Il menu dell’estensione mostra dove vanno le tue ricerche, permette di forzare il motore privato o quello pubblico e verifica di nuovo la tua istanza quando vuoi.
+>
+> Richiede iOS 17, iPadOS 17 o macOS 14 o versioni successive.
+
+**Novità (prima versione)**: `Prima versione.`
+
+### Portuguese (Brazil)
+
+**Nome**: `Ma recherche`
+
+**Subtítulo**: `Busca privada com reserva`
+
+**Texto promocional**:
+
+> Envie as buscas do Safari para sua própria instância do SearXNG em casa, e para o buscador público que você escolher quando ela estiver inacessível. Alterna sozinho.
+
+**Palavras-chave**: `searxng,buscador,privado,privacidade,auto-hospedado,homelab,redirecionar,reserva,metabusca,vpn`
+
+**Descrição**:
+
+> Use no Safari o buscador que você escolher, inclusive um privado rodando na sua casa, e nunca fique sem busca quando ele estiver inacessível.
+>
+> O Ma recherche envia as buscas digitadas na barra de endereço do Safari para o buscador que você escolher. Ele foi pensado para um buscador privado e auto-hospedado, como uma instância do SearXNG na sua rede doméstica, com um buscador público de reserva: Qwant, DuckDuckGo, Brave, Startpage, Google, Bing, Ecosia ou o endereço que você indicar.
+>
+> VERIFICA E ALTERNA SOZINHO
+> • Em casa ou na sua VPN, as buscas vão para seu buscador privado.
+> • Fora de casa, vão para seu buscador reserva, sem página de erro e sem mudar nenhum ajuste.
+> • De volta em casa, a primeira busca já volta para seu buscador privado.
+>
+> A verificação é uma simples requisição ao seu buscador. Sem nome de rede Wi-Fi, sem estado da VPN, sem permissão de localização: só importa se o seu buscador responde.
+>
+> PRIVADO DESDE O PROJETO
+> • O redirecionamento acontece dentro do Safari, antes de a requisição sair do seu dispositivo: o buscador padrão do Safari nunca vê sua busca.
+> • Sem conta, sem estatísticas, sem publicidade. Nada é enviado ao desenvolvedor.
+> • Código aberto (MIT): o código está no GitHub.
+>
+> FUNCIONA COM OS BUSCADORES DO SAFARI
+> Google, Bing, Yahoo, DuckDuckGo e Ecosia, em qualquer domínio nacional. Só as buscas da barra de endereço são redirecionadas: uma busca feita na página de um buscador não é alterada.
+>
+> O menu da extensão mostra para onde vão suas buscas, permite forçar o buscador privado ou o público e verifica sua instância de novo quando você quiser.
+>
+> Requer iOS 17, iPadOS 17 ou macOS 14 ou posterior.
+
+**Novidades (primeira versão)**: `Primeira versão.`
+
 ## 4. App Review notes
 
 Paste into **App Review Information → Notes** (no sign-in required):
@@ -192,7 +353,7 @@ The images are not committed (about 25 MB): they live in `docs/app-store/screens
 which git ignores.
 
 - Raw captures go in `docs/app-store/screenshots/raw/`, named
-  `<iphone|ipad|mac>-<en|fr>-<popup-private|popup-public|results|settings|app>.png`.
+  `<iphone|ipad|mac>-<en|fr|de|es|it|pt>-<popup-private|popup-public|results|settings|app>.png`.
   On a simulator: `xcrun simctl io <device> screenshot <file>`, after
   `xcrun simctl status_bar <device> override --time 9:41 ...`.
 - `./scripts/store_screenshots.sh` composes them (icon gradient, caption, rounded

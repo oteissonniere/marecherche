@@ -6,9 +6,12 @@ import { fileURLToPath } from "node:url";
 import { INTERCEPTED_ENGINES, PUBLIC_ENGINES } from "../src/lib/engines.js";
 
 const src = join(dirname(fileURLToPath(import.meta.url)), "..", "src");
-const locale = (code) => JSON.parse(readFileSync(join(src, "_locales", code, "messages.json"), "utf8"));
+const localesDir = join(src, "_locales");
+const locale = (code) => JSON.parse(readFileSync(join(localesDir, code, "messages.json"), "utf8"));
+// Every locale shipped in the extension; English is the reference.
+const codes = readdirSync(localesDir).filter((name) => statSync(join(localesDir, name)).isDirectory());
+const locales = codes.map((code) => [code, locale(code)]);
 const en = locale("en");
-const fr = locale("fr");
 
 function walk(dir) {
   return readdirSync(dir).flatMap((name) => {
@@ -17,20 +20,37 @@ function walk(dir) {
   });
 }
 
-test("en and fr define exactly the same keys", () => {
-  assert.deepEqual(Object.keys(fr).sort(), Object.keys(en).sort());
+test("English and French are shipped", () => {
+  assert.ok(codes.includes("en") && codes.includes("fr"), codes.join(","));
+});
+
+test("every locale defines exactly the same keys as English", () => {
+  for (const [code, messages] of locales) {
+    assert.deepEqual(Object.keys(messages).sort(), Object.keys(en).sort(), code);
+  }
+});
+
+// A translation that drops or renames $ENGINE$ would show a broken sentence.
+test("every locale keeps the placeholders of English", () => {
+  const tokens = (text) => [...text.matchAll(/\$[A-Za-z]+\$|\{q\}/g)].map((match) => match[0]).sort();
+  for (const [code, messages] of locales) {
+    for (const [key, entry] of Object.entries(en)) {
+      assert.deepEqual(tokens(messages[key].message), tokens(entry.message), `${code}.${key}`);
+      assert.deepEqual(messages[key].placeholders, entry.placeholders, `${code}.${key} placeholders`);
+    }
+  }
 });
 
 // App Store Connect rejects the upload otherwise ("Invalid messages file").
 test("the extension description is at most 112 characters", () => {
-  for (const [code, messages] of [["en", en], ["fr", fr]]) {
+  for (const [code, messages] of locales) {
     const { length } = messages.extension_description.message;
     assert.ok(length <= 112, `${code}: ${length} characters`);
   }
 });
 
 test("every message is a non-empty string", () => {
-  for (const [code, messages] of [["en", en], ["fr", fr]]) {
+  for (const [code, messages] of locales) {
     for (const [key, entry] of Object.entries(messages)) {
       assert.ok(typeof entry.message === "string" && entry.message.length > 0, `${code}.${key}`);
     }

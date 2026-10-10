@@ -33,7 +33,7 @@ This document is the single source of truth for the coding agent. Read Section 0
 5. **Use only the WebExtension APIs listed in Section 7.9.** If you believe another API is
    needed, stop and write the question in the milestone report instead of using it.
 6. **All code, comments, commit messages, docs: English.** User-facing strings go through
-   `_locales` (English + French).
+   `_locales` (English is the reference; one folder per language).
 7. **Tests must pass** (`npm test` in `webext/`) before a milestone is declared done.
 8. **Commits**: conventional commits (`feat:`, `fix:`, `test:`, `docs:`, `chore:`), one
    logical change per commit. Never commit signing identities, provisioning profiles or
@@ -129,8 +129,7 @@ This document is the single source of truth for the coding agent. Read Section 0
 │   ├── package.json                # { "scripts": { "test": "node --test" } }, no deps
 │   ├── src/                        # copied verbatim into the .appex as Resources
 │   │   ├── manifest.json
-│   │   ├── _locales/en/messages.json
-│   │   ├── _locales/fr/messages.json
+│   │   ├── _locales/<lang>/messages.json   # en (reference), fr, de, es, it, pt (Brazilian)
 │   │   ├── icons/                  # icon-16/32/48/64/96/128/256/512.png
 │   │   ├── background.js
 │   │   ├── ui.css                  # tokens and controls shared by popup and settings
@@ -158,7 +157,7 @@ This document is the single source of truth for the coding agent. Read Section 0
 │       ├── url.test.js
 │       ├── config.test.js
 │       ├── probe.test.js
-│       └── locales.test.js         # en/fr key parity, every referenced key exists
+│       └── locales.test.js         # every locale matches en (keys, placeholders), every referenced key exists
 └── Tests/
     └── AppTests/
         └── SmokeTests.swift        # XCTest: bundle id is as expected
@@ -509,7 +508,13 @@ settings page click handler (must run inside a user gesture).
 
 ### 7.2 Localization
 
-`_locales/en/messages.json` and `_locales/fr/messages.json`. Keys (all must exist in both):
+`_locales/<lang>/messages.json` for en, fr, de, es, it and pt (Brazilian Portuguese, which is
+what Apple's `pt` means). English is the reference: `locales.test.js` checks every folder
+against it, so adding a language is adding a folder. The description is limited to 112
+characters by App Store Connect. Wording that names Safari's own controls follows Safari's
+localized labels (see `docs/app-store/README.md`). The container app is localized with the
+String Catalogs in `App/`; xcodegen derives the project's languages from them. Keys (all
+must exist in every locale):
 
 ```
 extension_name, extension_description,
