@@ -309,6 +309,17 @@ native review: have them proofread before the 1.0 listing. They use Safari's own
 
 **Novidades (primeira versão)**: `Primeira versão.`
 
+### What's New, version 0.2.0
+
+| Language | Text |
+|---|---|
+| English | `Now in German, Spanish, Italian and Brazilian Portuguese. The setup steps quote Safari's exact wording.` |
+| French | `Désormais en allemand, espagnol, italien et portugais du Brésil. Les étapes d'installation reprennent les libellés exacts de Safari.` |
+| German | `Jetzt auch auf Deutsch, Spanisch, Italienisch und brasilianischem Portugiesisch.` |
+| Spanish | `Ahora en español, alemán, italiano y portugués de Brasil.` |
+| Italian | `Ora in italiano, tedesco, spagnolo e portoghese brasiliano.` |
+| Portuguese (Brazil) | `Agora em português do Brasil, alemão, espanhol e italiano.` |
+
 ## 4. App Review notes
 
 Paste into **App Review Information → Notes** (no sign-in required):
@@ -364,6 +375,7 @@ which git ignores.
 
 1. Bump the version in **both** places, they must match:
    `MARKETING_VERSION` in `project.yml` and `"version"` in `webext/src/manifest.json`.
+   `webext/test/manifest.test.js` fails when they differ.
    Bump `CURRENT_PROJECT_VERSION` for every upload (a build number can only be used
    once per version).
 2. `xcodegen generate`, then `./scripts/ci.sh` must pass.

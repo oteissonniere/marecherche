@@ -11,6 +11,9 @@ It sends your address-bar searches to the engine of your choice. It is built for
 instance on your home network, and backs it with a **mainstream fallback** (Qwant,
 DuckDuckGo, Brave, Startpage, Google, Bing, Ecosia, or any URL you provide).
 
+**[Download Ma recherche on the App Store](https://apps.apple.com/app/ma-recherche/id6817923708)**
+— free, one listing for iPhone, iPad and Mac (iOS 17, iPadOS 17 or macOS 14 or later).
+
 ## Why this one
 
 Safari does not let you add a custom search engine, so extensions of this kind redirect
@@ -27,8 +30,9 @@ Ma recherche **checks** whether your private engine answers and **switches** by 
 The check is a plain request to the engine itself. The extension needs no Wi-Fi name,
 no VPN status and no location permission: what matters is whether your engine answers.
 
-> Status: version 0.1.0 is in App Store review and in TestFlight testing. Working on Mac
-> and iPhone; iPad verified on the simulator.
+> Status: version 0.1.0 is on the App Store, in English and French. Version 0.2.0 adds
+> German, Spanish, Italian and Brazilian Portuguese. Working on Mac and iPhone; iPad
+> verified on the simulator.
 > See [docs/reports/M0.md](docs/reports/M0.md) for what has been verified on devices.
 
 ## How it works
@@ -63,8 +67,10 @@ private instance reachable everywhere, and the fallback then only covers real ou
 
 ## Setup
 
-1. Build and run the app (see below), then follow its on-screen steps to enable the
-   extension in Safari and allow it on all websites.
+1. Install the app from the
+   [App Store](https://apps.apple.com/app/ma-recherche/id6817923708) (or build it, see
+   below), open it, and follow its on-screen steps to enable the extension in Safari and
+   allow it on all websites.
 2. Open the extension popup → **Settings**, enter your instance URL
    (e.g. `http://192.168.1.10:8080`) and pick the public fallback engine. Until an
    instance URL is set, every search goes to the public engine and nothing is probed.
