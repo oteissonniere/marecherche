@@ -48,6 +48,9 @@ test("extractPublicQuery recognises the configured public engine only", () => {
   assert.equal(extractPublicQuery(config, "https://duckduckgo.com/?q=chat"), null);
   const custom = configured({ publicEngineId: "custom", publicCustomUrl: "https://s.example/find?query={q}" });
   assert.equal(extractPublicQuery(custom, "https://s.example/find?query=chat"), "chat");
+  // Fallback engines whose query parameter is not q.
+  assert.equal(extractPublicQuery(configured({ publicEngineId: "yahoo" }), "https://search.yahoo.com/search?p=chat"), "chat");
+  assert.equal(extractPublicQuery(configured({ publicEngineId: "swisscows" }), "https://swisscows.com/web?query=chat"), "chat");
 });
 
 test("extractInterceptedQuery matches what the redirect rules match", () => {

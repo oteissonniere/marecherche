@@ -9,7 +9,8 @@ Ma recherche is a Safari Web Extension for iPhone (iOS), iPad (iPadOS) and Mac (
 It sends your address-bar searches to the engine of your choice. It is built for a
 **self-hosted, private engine** such as a [SearXNG](https://github.com/searxng/searxng)
 instance on your home network, and backs it with a **mainstream fallback** (Qwant,
-DuckDuckGo, Brave, Startpage, Google, Bing, Ecosia, or any URL you provide).
+DuckDuckGo, Brave, Startpage, Mojeek, Swisscows, Kagi, Google, Bing, Yahoo, Ecosia, or any URL
+you provide). Kagi is a paid engine: it only answers while you are signed in to it in Safari.
 
 **[Download Ma recherche on the App Store](https://apps.apple.com/app/ma-recherche/id6817923708)**
 — free, one listing for iPhone, iPad and Mac (iOS 17, iPadOS 17 or macOS 14 or later).

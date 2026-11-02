@@ -71,8 +71,8 @@ URLs (both languages):
 >
 > Ma recherche sends the searches you type in Safari's address bar to the engine of your
 > choice. It is built for a self-hosted, private engine such as a SearXNG instance on your
-> home network, and backs it with a public fallback: Qwant, DuckDuckGo, Brave, Startpage,
-> Google, Bing, Ecosia, or any address you provide.
+> home network, and backs it with a public fallback: Qwant, DuckDuckGo, Brave, Startpage, Mojeek, Swisscows, Kagi,
+> Google, Bing, Yahoo, Ecosia, or any address you provide.
 >
 > CHECKS AND SWITCHES BY ITSELF
 > • At home or on your VPN, searches go to your private engine.
@@ -120,7 +120,7 @@ URLs (both languages):
 > Ma recherche envoie les recherches tapées dans la barre d'adresse de Safari vers le
 > moteur de votre choix. Elle est pensée pour un moteur privé auto-hébergé, comme une
 > instance SearXNG sur votre réseau domestique, avec un moteur public de secours : Qwant,
-> DuckDuckGo, Brave, Startpage, Google, Bing, Ecosia, ou l'adresse de votre choix.
+> DuckDuckGo, Brave, Startpage, Mojeek, Swisscows, Kagi, Google, Bing, Yahoo, Ecosia, ou l'adresse de votre choix.
 >
 > VÉRIFIE ET BASCULE TOUTE SEULE
 > • À la maison ou sur votre VPN, les recherches vont vers votre moteur privé.
@@ -169,7 +169,7 @@ native review: have them proofread before the 1.0 listing. They use Safari's own
 
 > Nutze in Safari die Suchmaschine deiner Wahl – auch eine private, die bei dir zu Hause läuft – und verliere die Suche nie, wenn sie nicht erreichbar ist.
 >
-> Ma recherche sendet die Suchen aus der Adressleiste von Safari an die Suchmaschine deiner Wahl. Die App ist für eine selbst gehostete, private Suchmaschine gedacht, etwa eine SearXNG-Instanz in deinem Heimnetz, und ergänzt sie um eine öffentliche Ersatz-Suchmaschine: Qwant, DuckDuckGo, Brave, Startpage, Google, Bing, Ecosia oder eine Adresse deiner Wahl.
+> Ma recherche sendet die Suchen aus der Adressleiste von Safari an die Suchmaschine deiner Wahl. Die App ist für eine selbst gehostete, private Suchmaschine gedacht, etwa eine SearXNG-Instanz in deinem Heimnetz, und ergänzt sie um eine öffentliche Ersatz-Suchmaschine: Qwant, DuckDuckGo, Brave, Startpage, Mojeek, Swisscows, Kagi, Google, Bing, Yahoo, Ecosia oder eine Adresse deiner Wahl.
 >
 > PRÜFT UND WECHSELT VON SELBST
 > • Zu Hause oder über dein VPN gehen die Suchen an deine private Suchmaschine.
@@ -208,7 +208,7 @@ native review: have them proofread before the 1.0 listing. They use Safari's own
 
 > Usa en Safari el buscador que tú elijas —incluido uno privado que funcione en tu casa— y no te quedes nunca sin búsqueda cuando no esté accesible.
 >
-> Ma recherche envía las búsquedas que escribes en la barra de direcciones de Safari al buscador que elijas. Está pensada para un buscador privado y autoalojado, como una instancia de SearXNG en tu red doméstica, con un buscador público de respaldo: Qwant, DuckDuckGo, Brave, Startpage, Google, Bing, Ecosia o la dirección que indiques.
+> Ma recherche envía las búsquedas que escribes en la barra de direcciones de Safari al buscador que elijas. Está pensada para un buscador privado y autoalojado, como una instancia de SearXNG en tu red doméstica, con un buscador público de respaldo: Qwant, DuckDuckGo, Brave, Startpage, Mojeek, Swisscows, Kagi, Google, Bing, Yahoo, Ecosia o la dirección que indiques.
 >
 > COMPRUEBA Y CAMBIA SOLA
 > • En casa o con tu VPN, las búsquedas van a tu buscador privado.
@@ -247,7 +247,7 @@ native review: have them proofread before the 1.0 listing. They use Safari's own
 
 > Usa in Safari il motore di ricerca che preferisci, anche uno privato che gira a casa tua, senza mai restare senza ricerca quando non è raggiungibile.
 >
-> Ma recherche invia le ricerche digitate nella barra degli indirizzi di Safari al motore che scegli. È pensata per un motore privato e self-hosted, come un’istanza SearXNG nella tua rete di casa, affiancato da un motore pubblico di riserva: Qwant, DuckDuckGo, Brave, Startpage, Google, Bing, Ecosia o un indirizzo a tua scelta.
+> Ma recherche invia le ricerche digitate nella barra degli indirizzi di Safari al motore che scegli. È pensata per un motore privato e self-hosted, come un’istanza SearXNG nella tua rete di casa, affiancato da un motore pubblico di riserva: Qwant, DuckDuckGo, Brave, Startpage, Mojeek, Swisscows, Kagi, Google, Bing, Yahoo, Ecosia o un indirizzo a tua scelta.
 >
 > VERIFICA E PASSA DA SOLA
 > • A casa o con la tua VPN, le ricerche vanno al tuo motore privato.
@@ -286,7 +286,7 @@ native review: have them proofread before the 1.0 listing. They use Safari's own
 
 > Use no Safari o buscador que você escolher, inclusive um privado rodando na sua casa, e nunca fique sem busca quando ele estiver inacessível.
 >
-> O Ma recherche envia as buscas digitadas na barra de endereço do Safari para o buscador que você escolher. Ele foi pensado para um buscador privado e auto-hospedado, como uma instância do SearXNG na sua rede doméstica, com um buscador público de reserva: Qwant, DuckDuckGo, Brave, Startpage, Google, Bing, Ecosia ou o endereço que você indicar.
+> O Ma recherche envia as buscas digitadas na barra de endereço do Safari para o buscador que você escolher. Ele foi pensado para um buscador privado e auto-hospedado, como uma instância do SearXNG na sua rede doméstica, com um buscador público de reserva: Qwant, DuckDuckGo, Brave, Startpage, Mojeek, Swisscows, Kagi, Google, Bing, Yahoo, Ecosia ou o endereço que você indicar.
 >
 > VERIFICA E ALTERNA SOZINHO
 > • Em casa ou na sua VPN, as buscas vão para seu buscador privado.

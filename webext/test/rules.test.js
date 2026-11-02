@@ -134,6 +134,14 @@ test("loop guard: public target never redirects an engine to itself", () => {
   assert.ok(buildRules(config, "private").some((r) => googleIds.has(r.id)));
 });
 
+test("loop guard: Yahoo as fallback is not redirected to itself", () => {
+  const config = configured({ publicEngineId: "yahoo" });
+  const yahooIds = new Set(regexFiltersFor(INTERCEPTED_ENGINES.yahoo, true).map((f) => f.id));
+  const rules = buildRules(config, "public");
+  assert.ok(!rules.some((r) => yahooIds.has(r.id)));
+  assert.equal(rules[0].action.redirect.regexSubstitution, "https://search.yahoo.com/search?p=\\1");
+});
+
 test("regexSubstitution points at the decided target", () => {
   const config = configured();
   assert.equal(buildRules(config, "private")[0].action.redirect.regexSubstitution,

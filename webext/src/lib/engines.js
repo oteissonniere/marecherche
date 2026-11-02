@@ -43,8 +43,13 @@ export const PUBLIC_ENGINES = Object.freeze({
   duckduckgo: { id: "duckduckgo", nameKey: "engine_duckduckgo", url: "https://duckduckgo.com/?q={q}",             interceptedId: "duckduckgo" },
   brave:      { id: "brave",      nameKey: "engine_brave",      url: "https://search.brave.com/search?q={q}",     interceptedId: null },
   startpage:  { id: "startpage",  nameKey: "engine_startpage",  url: "https://www.startpage.com/do/search?q={q}", interceptedId: null },
+  mojeek:     { id: "mojeek",     nameKey: "engine_mojeek",     url: "https://www.mojeek.com/search?q={q}",       interceptedId: null },
+  swisscows:  { id: "swisscows",  nameKey: "engine_swisscows",  url: "https://swisscows.com/web?query={q}",       interceptedId: null },
+  // Kagi is paid: searches only work while the user is signed in to Kagi in Safari.
+  kagi:       { id: "kagi",       nameKey: "engine_kagi",       url: "https://kagi.com/search?q={q}",             interceptedId: null },
   google:     { id: "google",     nameKey: "engine_google",     url: "https://www.google.com/search?q={q}",       interceptedId: "google" },
   bing:       { id: "bing",       nameKey: "engine_bing",       url: "https://www.bing.com/search?q={q}",         interceptedId: "bing" },
+  yahoo:      { id: "yahoo",      nameKey: "engine_yahoo",      url: "https://search.yahoo.com/search?p={q}",     interceptedId: "yahoo" },
   ecosia:     { id: "ecosia",     nameKey: "engine_ecosia",     url: "https://www.ecosia.org/search?q={q}",       interceptedId: "ecosia" }
 });
 
