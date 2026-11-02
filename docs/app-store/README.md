@@ -309,6 +309,17 @@ native review: have them proofread before the 1.0 listing. They use Safari's own
 
 **Novidades (primeira versão)**: `Primeira versão.`
 
+### What's New, version 0.3.0
+
+| Language | Text |
+|---|---|
+| English | `New fallback engines: Yahoo, Mojeek, Swisscows and Kagi.` |
+| French | `Nouveaux moteurs de secours : Yahoo, Mojeek, Swisscows et Kagi.` |
+| German | `Neue Ersatz-Suchmaschinen: Yahoo, Mojeek, Swisscows und Kagi.` |
+| Spanish | `Nuevos buscadores de respaldo: Yahoo, Mojeek, Swisscows y Kagi.` |
+| Italian | `Nuovi motori di riserva: Yahoo, Mojeek, Swisscows e Kagi.` |
+| Portuguese (Brazil) | `Novos buscadores reserva: Yahoo, Mojeek, Swisscows e Kagi.` |
+
 ### What's New, version 0.2.0
 
 | Language | Text |
