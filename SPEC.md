@@ -979,7 +979,7 @@ Form fields (in this order):
 1. Private instance URL (text, placeholder `http://192.168.1.10:8080`) + help text.
 2. Search path (text, default `/search?q={q}`) — advanced, collapsed by default.
 3. Probe path (text, default `/healthz`) — advanced, collapsed by default.
-4. Public engine (select: Qwant, DuckDuckGo, Brave, Startpage, Google, Bing, Ecosia, Custom).
+4. Public engine (select: Qwant, DuckDuckGo, Brave, Startpage, Mojeek, Swisscows, Kagi, Google, Bing, Yahoo, Ecosia, Custom).
 5. Custom public URL (text, shown only when "Custom", placeholder `https://example.com/search?q={q}`).
 6. Intercepted engines (checkboxes: Google, Bing, DuckDuckGo, Yahoo, Ecosia).
 7. Only redirect address-bar searches (checkbox, default on) + help text explaining the

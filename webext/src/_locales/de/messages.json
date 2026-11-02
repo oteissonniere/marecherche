@@ -58,6 +58,9 @@
   "engine_qwant": { "message": "Qwant" },
   "engine_brave": { "message": "Brave Search" },
   "engine_startpage": { "message": "Startpage" },
+  "engine_mojeek": { "message": "Mojeek" },
+  "engine_swisscows": { "message": "Swisscows" },
+  "engine_kagi": { "message": "Kagi" },
   "engine_custom": { "message": "Eigene…" },
 
   "unit_seconds": { "message": "$N$ s", "placeholders": { "n": { "content": "$1" } } },
