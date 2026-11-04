@@ -31,7 +31,7 @@ Ma recherche **checks** whether your private engine answers and **switches** by 
 The check is a plain request to the engine itself. The extension needs no Wi-Fi name,
 no VPN status and no location permission: what matters is whether your engine answers.
 
-> Status: version 0.2.0 is on the App Store, in English, French, German, Spanish, Italian
+> Status: version 0.3.0 is on the App Store (released on 4 November 2026), in English, French, German, Spanish, Italian
 > and Brazilian Portuguese. Working on Mac and iPhone; iPad verified on the simulator.
 > See [docs/reports/M0.md](docs/reports/M0.md) for what has been verified on devices.
 
